@@ -11,20 +11,20 @@
       "resizeMode": "contain",
       "backgroundColor": "#b981e7"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "splash": {
         "image": "./assets/Sigma1.png",
         "resizeMode": "contain",
-        "backgroundColor": "#b981e7"}
+        "backgroundColor": "#b981e7"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/Sigma_icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
+        "permissions": ["INTERNET"]
       }
     },
     "web": {
