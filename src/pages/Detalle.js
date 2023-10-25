@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import DetalleRopa from "../components/detalleRopa";
+import GlobalApi from "../services/GlobalApi";
 
 export default function DetalleConjunto() {
-  const lis = [1, 2, 3, 4];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getRopas();
+  }, []);
+
+  const getRopas = async () => {
+    const res = (await GlobalApi.getRopas()).data.data;
+    setData(res);
+  };
+
   return (
     <View
       style={{
@@ -44,7 +54,9 @@ export default function DetalleConjunto() {
         </Text>
       </View>
       <View>
-        <DetalleRopa />
+        {data.map(({ attributes, id }) => (
+          <DetalleRopa key={id} {...attributes} />
+        ))}
       </View>
     </View>
   );

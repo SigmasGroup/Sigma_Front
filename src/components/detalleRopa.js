@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
+import GlobalApi from "../services/GlobalApi";
 
-export default function DetalleRopa() {
+export default function DetalleRopa(attributes) {
   return (
     <View>
       <ScrollView>
@@ -13,20 +14,21 @@ export default function DetalleRopa() {
               paddingVertical: 16,
             }}
           >
+            {console.log(GlobalApi.getImg({ attributes }))}
             <Image
-              source={require("../../assets/favicon.png")}
+              src={GlobalApi.getImg({ attributes })}
               style={{ width: 64, height: 64, borderRadius: 32 }}
             />
             <View style={{ flex: 1, marginLeft: 16 }}>
               <Text style={{ fontSize: 16, fontWeight: "bold", color: "gray" }}>
-                Neil Sims
+                {attributes.nombre}
               </Text>
               <Text style={{ fontSize: 14, color: "gray" }}>
-                email@windster.com
+                {attributes.descripcion}
               </Text>
             </View>
             <Text style={{ fontSize: 16, fontWeight: "bold", color: "gray" }}>
-              $320
+              {attributes.color}
             </Text>
           </View>
         </View>
