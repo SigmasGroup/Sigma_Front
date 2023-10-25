@@ -7,14 +7,14 @@ import DetalleConjunto from "./Detalle";
 export default function HomeScreen() {
   const [data, setData] = useState();
 
-  // useEffect(() => {
-  //   getRopas();
-  // }, []);
+  useEffect(() => {
+    getRopas();
+  }, []);
 
-  // const getRopas = async () => {
-  //   const res = (await GlobalApi.getRopas()).data.data;
-  //   console.log(res);
-  // };
+  const getRopas = async () => {
+    const res = (await GlobalApi.getRopas()).data.data;
+    console.log(res);
+  };
 
   return (
     <View style={styles.container}>
