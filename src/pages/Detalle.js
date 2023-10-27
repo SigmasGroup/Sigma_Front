@@ -20,12 +20,12 @@ export default function DetalleConjunto() {
         maxWidth: 320,
         backgroundColor: "white",
         borderWidth: 1,
-        borderColor: "green",
         borderRadius: 8,
         shadowColor: "black",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         marginBottom: 16,
+        flexDirection: "column",
       }}
     >
       <View style={{ padding: 16 }}>
@@ -37,7 +37,7 @@ export default function DetalleConjunto() {
           far, in reverse chronological order
         </Text>
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, justifyContent: "center" }}>
         {data.map(
           ({ attributes, id }) => (
             <DetalleRopa key={id} {...attributes} />
