@@ -19,32 +19,34 @@ const Login = () => {
       <View
         style={{
           width: "100%",
-          maxWidth: 320,
+          height: "70%",
+          maxWidth: 340,
           padding: 16,
-          backgroundColor: "white",
-          borderWidth: 1,
-          borderColor: "gray",
-          borderRadius: 8,
-          shadowColor: "black",
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
+          backgroundColor: "#F0F0F0",
           marginBottom: 16,
         }}
       >
-        <Text style={{ fontSize: 20, fontWeight: "bold", color: "gray" }}>
-          Sign in to our platform
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "#b880e7",
+            textShadowRadius: 1.5,
+            textShadowColor: "black",
+          }}
+        >
+          Inicia Sesion En Sigma!
         </Text>
-        <View style={{ marginTop: 16 }}>
+        <View style={{ marginTop: 96 }}>
           <Text
             style={{
               marginBottom: 4,
               fontSize: 14,
               fontWeight: "bold",
-              color: "gray",
+              color: "#0F0F0F",
             }}
           >
-            Your email
+            Tu email
           </Text>
           <TextInput
             style={{
@@ -57,19 +59,19 @@ const Login = () => {
               padding: 10,
               marginBottom: 8,
             }}
-            placeholder="name@company.com"
+            placeholder="nombre@email.cl"
           />
         </View>
-        <View style={{ marginTop: 16 }}>
+        <View style={{ marginTop: 32 }}>
           <Text
             style={{
               marginBottom: 4,
               fontSize: 14,
               fontWeight: "bold",
-              color: "gray",
+              color: "#0f0f0f",
             }}
           >
-            Your password
+            Tu contrasena
           </Text>
           <TextInput
             style={{
@@ -82,12 +84,12 @@ const Login = () => {
               padding: 10,
               marginBottom: 8,
             }}
-            placeholder="••••••••"
+            placeholder="•••••••••••"
             secureTextEntry={true}
           />
         </View>
         <View
-          style={{ flexDirection: "row", alignItems: "center", marginTop: 16 }}
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 64 }}
         >
           <Text
             style={{
@@ -97,34 +99,34 @@ const Login = () => {
               textDecorationLine: "underline",
             }}
           >
-            Lost Password?
+            Olvidaste tu contrasena?
           </Text>
         </View>
         <TouchableOpacity
           onPress={(e) => navigation.replace("home")}
           style={{
-            backgroundColor: "blue",
+            backgroundColor: "0F0F0F",
             marginTop: 16,
             borderRadius: 8,
             alignItems: "center",
             paddingVertical: 10,
           }}
         >
-          <Text style={{ color: "white", fontSize: 14, fontWeight: "bold" }}>
-            Login to your account
+          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
+            Iniciar Sesion
           </Text>
         </TouchableOpacity>
         <Text
           style={{
             fontSize: 14,
             fontWeight: "bold",
-            color: "gray",
-            marginTop: 16,
+            color: "#0F0F0F",
+            marginTop: 64,
           }}
         >
-          Not registered?{" "}
+          No estas registrado?{" "}
           <Text style={{ color: "blue", textDecorationLine: "underline" }}>
-            Create account
+            Crear cuenta
           </Text>
         </Text>
       </View>
