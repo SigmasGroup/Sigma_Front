@@ -22,7 +22,6 @@ export default function DetalleRopa(attributes) {
             maxHeight: 90,
           }}
         >
-          {console.log(GlobalApi.getImg({ attributes }))}
           <Image
             src={GlobalApi.getImg({ attributes })}
             style={{

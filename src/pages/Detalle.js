@@ -5,13 +5,24 @@ import GlobalApi from "../services/GlobalApi";
 
 export default function DetalleConjunto() {
   const [data, setData] = useState([]);
+  const [detalle, setDetalle] = useState([]);
   useEffect(() => {
     getRopas();
+    getDetalle();
   }, []);
 
   const getRopas = async () => {
     const res = (await GlobalApi.getRopas()).data.data;
-    setData(res);
+    const respueta = (await GlobalApi.getDetalle()).data.data;
+    setDetalle(respueta);
+    // setData(res);
+  };
+
+  const getDetalle = () => {
+    ropas = detalle.map((x) => {
+      return x.attributes.ropas.data;
+    });
+    setData(...ropas);
   };
 
   return (

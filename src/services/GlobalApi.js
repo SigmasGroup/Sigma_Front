@@ -9,8 +9,10 @@ const api = create({
 });
 
 const getRopas = () => api.get("/api/ropas?populate[img][fields][0]=url");
+const getDetalle = () =>
+  api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
 const getImg = ({ attributes }) => {
   const { url } = attributes.img.data.attributes;
   return `http://sigma-l1x8.onrender.com${url}`;
 };
-export default { getRopas, getImg };
+export default { getRopas, getImg, getDetalle };
