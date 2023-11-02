@@ -13,6 +13,7 @@ export default function DetalleRopa(attributes) {
           paddingHorizontal: 10,
           margin: 2,
           justifyContent: "space-around",
+          width: 320,
         }}
       >
         <View
