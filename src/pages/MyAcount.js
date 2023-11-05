@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   StatusBar,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
+import GlobalApi from "../services/GlobalApi";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
@@ -51,35 +52,31 @@ export default function SeleccionRopa() {
 
   const getRopas = async () => {
     const respueta = (await GlobalApi.getRopas()).data.data;
-    respueta.map((attributes) => {
-      setItemsTorso(
-        respueta
-          .filter((attributes) => attributes.attributes.tipoPrenda === "troso")
-          .map((attributes) => ({
-            label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
-            value: attributes.id,
-          }))
-      );
+    setItemsTorso(
+      respueta
+        .filter((attributes) => attributes.attributes.tipoPrenda === "troso")
+        .map((attributes) => ({
+          label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
+          value: attributes.id,
+        }))
+    );
 
-      setItemsPiernas(
-        respueta
-          .filter(
-            (attributes) => attributes.attributes.tipoPrenda === "piernas"
-          )
-          .map((attributes) => ({
-            label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
-            value: attributes.id,
-          }))
-      );
-      setItemsPies(
-        respueta
-          .filter((attributes) => attributes.attributes.tipoPrenda === "pies")
-          .map((attributes) => ({
-            label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
-            value: attributes.id,
-          }))
-      );
-    });
+    setItemsPiernas(
+      respueta
+        .filter((attributes) => attributes.attributes.tipoPrenda === "piernas")
+        .map((attributes) => ({
+          label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
+          value: attributes.id,
+        }))
+    );
+    setItemsPies(
+      respueta
+        .filter((attributes) => attributes.attributes.tipoPrenda === "pies")
+        .map((attributes) => ({
+          label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
+          value: attributes.id,
+        }))
+    );
   };
   return (
     <View style={styles.container}>
@@ -234,9 +231,17 @@ export default function SeleccionRopa() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
+    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "top",
+    paddingTop: StatusBar.currentHeight,
+    paddingBottom: 64,
+    paddingHorizontal: 15,
+    justifyContent: "space-between",
+  },
+  texto: {
+    fontSize: 16,
+    textAlign: "center",
   },
 });
