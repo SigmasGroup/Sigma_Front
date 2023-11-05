@@ -5,7 +5,7 @@ import GlobalApi from "../services/GlobalApi";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
-export default function SeleccionRopa() {
+export default function SeleccionRopaComunida() {
   const [value, setValue] = useState([]);
   const [openCabeza, setOpenCabeza] = useState(false);
   const [openTorso, setOpenTorso] = useState(false);
