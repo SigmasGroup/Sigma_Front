@@ -1,15 +1,35 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, Button, ScrollView, StatusBar } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, StyleSheet, Text, Button, StatusBar } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
 export default function SeleccionRopa() {
+  const [value, setValue] = useState([]);
   const [openCabeza, setOpenCabeza] = useState(false);
   const [openTorso, setOpenTorso] = useState(false);
   const [openPiernas, setOpenPiernas] = useState(false);
   const [openPies, setOpenPies] = useState(false);
-  const [value, setValue] = useState([]);
+  const onOpenCabeza = useCallback(() => {
+    setOpenTorso(false);
+    setOpenPiernas(false);
+    setOpenPies(false);
+  }, []);
+  const onOpenTorso = useCallback(() => {
+    setOpenCabeza(false);
+    setOpenPiernas(false);
+    setOpenPies(false);
+  }, []);
+  const onOpenPiernas = useCallback(() => {
+    setOpenTorso(false);
+    setOpenCabeza(false);
+    setOpenPies(false);
+  }, []);
+  const onOpenPies = useCallback(() => {
+    setOpenTorso(false);
+    setOpenPiernas(false);
+    setOpenCabeza(false);
+  }, []);
   const [cabeza, setItemsCabeza] = useState([
     { label: "Cabeza", value: "Cabeza" },
     { label: "Gorro de lana", value: "gorritodelana", parent: "Cabeza" },
@@ -59,6 +79,7 @@ export default function SeleccionRopa() {
             height: 100,
           }}
           open={openCabeza}
+          onOpen={onOpenCabeza}
           value={value}
           items={cabeza}
           setOpen={setOpenCabeza}
@@ -93,6 +114,7 @@ export default function SeleccionRopa() {
             height: 100,
           }}
           open={openTorso}
+          onOpen={onOpenTorso}
           value={value}
           items={torso}
           setOpen={setOpenTorso}
@@ -127,6 +149,7 @@ export default function SeleccionRopa() {
             height: 100,
           }}
           open={openPiernas}
+          onOpen={onOpenPiernas}
           value={value}
           items={piernas}
           setOpen={setOpenPiernas}
@@ -161,6 +184,7 @@ export default function SeleccionRopa() {
             height: 100,
           }}
           open={openPies}
+          onOpen={onOpenPies}
           value={value}
           items={pies}
           setOpen={setOpenPies}
