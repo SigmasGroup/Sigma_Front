@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Text, Button, ScrollView, StatusBar } from "react-native";
+import { View, StyleSheet, Text, Button, ScrollView, StatusBar } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
@@ -39,151 +39,149 @@ export default function SeleccionRopa() {
   ]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.texto}>
         Selecciona tus prendas favoritas para que nosotros te recomendemos el
         outfit!
       </Text>
-      <ScrollView style={styles.scrollView}>
-      <DropDownPicker
-        zIndex={3000}
-        zIndexInverse={1000}
-        categorySelectable={false}
-        dropDownContainerStyle={{}}
-        listParentLabelStyle={{
-          fontWeight: "bold",
-        }}
-        listChildContainerStyle={{
-          paddingLeft: 32,
-        }}
-        listItemContainer={{
-          height: 100,
-        }}
-        open={openCabeza}
-        value={value}
-        items={cabeza}
-        setOpen={setOpenCabeza}
-        setValue={setValue}
-        setItems={setItemsCabeza}
-        theme="DARK"
-        multiple={true}
-        mode="BADGE"
-        badgeDotColors={[
-          "#e76f51",
-          "#00b4d8",
-          "#e9c46a",
-          "#e76f51",
-          "#8ac926",
-          "#00b4d8",
-          "#e9c46a",
-        ]}
-      />
-            <DropDownPicker
-        zIndex={3000}
-        zIndexInverse={1000}
-        categorySelectable={false}
-        dropDownContainerStyle={{}}
-        listParentLabelStyle={{
-          fontWeight: "bold",
-        }}
-        listChildContainerStyle={{
-          paddingLeft: 32,
-        }}
-        listItemContainer={{
-          height: 100,
-        }}
-        open={openTorso}
-        value={value}
-        items={torso}
-        setOpen={setOpenTorso}
-        setValue={setValue}
-        setItems={setItemsTorso}
-        theme="DARK"
-        multiple={true}
-        mode="BADGE"
-        badgeDotColors={[
-          "#e76f51",
-          "#00b4d8",
-          "#e9c46a",
-          "#e76f51",
-          "#8ac926",
-          "#00b4d8",
-          "#e9c46a",
-        ]}
-      />
-            <DropDownPicker
-        zIndex={3000}
-        zIndexInverse={1000}
-        categorySelectable={false}
-        dropDownContainerStyle={{}}
-        listParentLabelStyle={{
-          fontWeight: "bold",
-        }}
-        listChildContainerStyle={{
-          paddingLeft: 32,
-        }}
-        listItemContainer={{
-          height: 100,
-        }}
-        open={openPiernas}
-        value={value}
-        items={piernas}
-        setOpen={setOpenPiernas}
-        setValue={setValue}
-        setItems={setItemsPiernas}
-        theme="DARK"
-        multiple={true}
-        mode="BADGE"
-        badgeDotColors={[
-          "#e76f51",
-          "#00b4d8",
-          "#e9c46a",
-          "#e76f51",
-          "#8ac926",
-          "#00b4d8",
-          "#e9c46a",
-        ]}
-      />
-            <DropDownPicker
-        zIndex={3000}
-        zIndexInverse={1000}
-        categorySelectable={false}
-        dropDownContainerStyle={{}}
-        listParentLabelStyle={{
-          fontWeight: "bold",
-        }}
-        listChildContainerStyle={{
-          paddingLeft: 32,
-        }}
-        listItemContainer={{
-          height: 100,
-        }}
-        open={openPies}
-        value={value}
-        items={pies}
-        setOpen={setOpenPies}
-        setValue={setValue}
-        setItems={setItemsPies}
-        theme="DARK"
-        multiple={true}
-        mode="BADGE"
-        badgeDotColors={[
-          "#e76f51",
-          "#00b4d8",
-          "#e9c46a",
-          "#e76f51",
-          "#8ac926",
-          "#00b4d8",
-          "#e9c46a",
-        ]}
-      />
+      <View style={{zIndex: openCabeza ? 1: 0 }}>
+        <DropDownPicker
+          categorySelectable={false}
+          dropDownContainerStyle={{}}
+          listParentLabelStyle={{
+            fontWeight: "bold",
+          }}
+          listChildContainerStyle={{
+            paddingLeft: 32,
+          }}
+          listItemContainer={{
+            height: 100,
+          }}
+          open={openCabeza}
+          value={value}
+          items={cabeza}
+          setOpen={setOpenCabeza}
+          setValue={setValue}
+          setItems={setItemsCabeza}
+          theme="DARK"
+          multiple={true}
+          mode="BADGE"
+          badgeDotColors={[
+            "#e76f51",
+            "#00b4d8",
+            "#e9c46a",
+            "#e76f51",
+            "#8ac926",
+            "#00b4d8",
+            "#e9c46a",
+          ]}
+        />
+      </View>
+      <View style={{zIndex: openTorso ? 1: 0 }}>
+        <DropDownPicker
+          categorySelectable={false}
+          dropDownContainerStyle={{}}
+          listParentLabelStyle={{
+            fontWeight: "bold",
+          }}
+          listChildContainerStyle={{
+            paddingLeft: 32,
+          }}
+          listItemContainer={{
+            height: 100,
+          }}
+          open={openTorso}
+          value={value}
+          items={torso}
+          setOpen={setOpenTorso}
+          setValue={setValue}
+          setItems={setItemsTorso}
+          theme="DARK"
+          multiple={true}
+          mode="BADGE"
+          badgeDotColors={[
+            "#e76f51",
+            "#00b4d8",
+            "#e9c46a",
+            "#e76f51",
+            "#8ac926",
+            "#00b4d8",
+            "#e9c46a",
+          ]}
+        />
+      </View>
+      <View style={{zIndex: openPiernas ? 1: 0 }}>
+        <DropDownPicker
+          categorySelectable={false}
+          dropDownContainerStyle={{}}
+          listParentLabelStyle={{
+            fontWeight: "bold",
+          }}
+          listChildContainerStyle={{
+            paddingLeft: 32,
+          }}
+          listItemContainer={{
+            height: 100,
+          }}
+          open={openPiernas}
+          value={value}
+          items={piernas}
+          setOpen={setOpenPiernas}
+          setValue={setValue}
+          setItems={setItemsPiernas}
+          theme="DARK"
+          multiple={true}
+          mode="BADGE"
+          badgeDotColors={[
+            "#e76f51",
+            "#00b4d8",
+            "#e9c46a",
+            "#e76f51",
+            "#8ac926",
+            "#00b4d8",
+            "#e9c46a",
+          ]}
+         />
+      </View>
+      <View style={{zIndex: openPies ? 1: 0 }}>
+        <DropDownPicker
+          categorySelectable={false}
+          dropDownContainerStyle={{}}
+          listParentLabelStyle={{
+            fontWeight: "bold",
+          }}
+          listChildContainerStyle={{
+            paddingLeft: 32,
+          }}
+          listItemContainer={{
+            height: 100,
+          }}
+          open={openPies}
+          value={value}
+          items={pies}
+          setOpen={setOpenPies}
+          setValue={setValue}
+          setItems={setItemsPies}
+          theme="DARK"
+          multiple={true}
+          mode="BADGE"
+          badgeDotColors={[
+            "#e76f51",
+            "#00b4d8",
+            "#e9c46a",
+            "#e76f51",
+            "#8ac926",
+            "#00b4d8",
+            "#e9c46a",
+          ]}
+        />
+      </View>
       <Button
         title="Crear Conjunto"
         color="#b880e7"
         onPress={() => console.log("wena")}
       />
-      </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 const styles = StyleSheet.create({
@@ -193,7 +191,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "top",
     paddingTop: StatusBar.currentHeight,
-    paddingBottom: 64,
+    paddingBottom: 15,
     paddingHorizontal: 15,
     justifyContent: "space-between",
   },
@@ -201,8 +199,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
-  scrollView:{
-    marginHorizontal: 20,
-    height: '100%',
-  }
 });
