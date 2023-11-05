@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -8,7 +8,6 @@ import {
   StatusBar,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import GlobalApi from "../services/GlobalApi";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
@@ -46,9 +45,6 @@ export default function SeleccionRopa() {
     { label: "Zapatillas Adidas", value: "zapatillasadidas", parent: "Pies" },
     { label: "Jordan retro 4", value: "jordansitas", parent: "Pies" },
   ]);
-  const [item1, setItems1] = useState([]);
-  const [item2, setItems2] = useState([]);
-  const [item3, setItems3] = useState([]);
   useEffect(() => {
     getRopas();
   }, []);
@@ -85,7 +81,6 @@ export default function SeleccionRopa() {
       );
     });
   };
-
   return (
     <View style={styles.container}>
       <Text style={styles.texto}>
@@ -236,19 +231,12 @@ export default function SeleccionRopa() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     flex: 1,
+    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "top",
-    paddingTop: StatusBar.currentHeight,
-    paddingBottom: 64,
-    paddingHorizontal: 15,
-    justifyContent: "space-between",
-  },
-  texto: {
-    fontSize: 16,
-    textAlign: "center",
+    justifyContent: "center",
   },
 });
