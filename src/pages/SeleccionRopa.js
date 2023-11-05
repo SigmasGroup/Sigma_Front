@@ -32,13 +32,12 @@ export default function SeleccionRopa() {
     setOpenCabeza(false);
   }, []);
   const [cabeza, setItemsCabeza] = useState([
-    { label: "Cabeza", value: "Cabeza" },
-    { label: "Gorro de lana", value: "gorritodelana", parent: "Cabeza" },
-    { label: "Yokie", value: "yokie", parent: "Cabeza" },
+    { label: "uwu", value: "Cabeza" },
+    { label: "Gorro de lana", value: "gorritodelana"},
+    { label: "Yokie", value: "yokie"},
     {
       label: "Gorro de pescador",
       value: "gorritodepescador",
-      parent: "Cabeza",
     },
   ]);
   const [torso, setItemsTorso] = useState([]);
@@ -86,14 +85,8 @@ export default function SeleccionRopa() {
       <View style={{ zIndex: openCabeza ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona cabezas"
-          categorySelectable={false}
+          categorySelectable={true}
           dropDownContainerStyle={{}}
-          listParentLabelStyle={{
-            fontWeight: "bold",
-          }}
-          listChildContainerStyle={{
-            paddingLeft: 32,
-          }}
           listItemContainer={{
             height: 100,
           }}
@@ -121,14 +114,8 @@ export default function SeleccionRopa() {
       <View style={{ zIndex: openTorso ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona torsos"
-          categorySelectable={false}
+          categorySelectable={true}
           dropDownContainerStyle={{}}
-          listParentLabelStyle={{
-            fontWeight: "bold",
-          }}
-          listChildContainerStyle={{
-            paddingLeft: 32,
-          }}
           listItemContainer={{
             height: 100,
           }}
@@ -156,14 +143,8 @@ export default function SeleccionRopa() {
       <View style={{ zIndex: openPiernas ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona partes de abajo"
-          categorySelectable={false}
+          categorySelectable={true}
           dropDownContainerStyle={{}}
-          listParentLabelStyle={{
-            fontWeight: "bold",
-          }}
-          listChildContainerStyle={{
-            paddingLeft: 32,
-          }}
           listItemContainer={{
             height: 100,
           }}
@@ -191,14 +172,8 @@ export default function SeleccionRopa() {
       <View style={{ zIndex: openPies ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona calzados"
-          categorySelectable={false}
+          categorySelectable={true}
           dropDownContainerStyle={{}}
-          listParentLabelStyle={{
-            fontWeight: "bold",
-          }}
-          listChildContainerStyle={{
-            paddingLeft: 32,
-          }}
           listItemContainer={{
             height: 100,
           }}
