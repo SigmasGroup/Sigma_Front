@@ -46,6 +46,7 @@ export default function SeleccionRopa() {
       </Text>
       <View style={{zIndex: openCabeza ? 1: 0 }}>
         <DropDownPicker
+          placeholder="Selecciona cabezas"
           categorySelectable={false}
           dropDownContainerStyle={{}}
           listParentLabelStyle={{
@@ -79,6 +80,7 @@ export default function SeleccionRopa() {
       </View>
       <View style={{zIndex: openTorso ? 1: 0 }}>
         <DropDownPicker
+          placeholder="Selecciona torsos"
           categorySelectable={false}
           dropDownContainerStyle={{}}
           listParentLabelStyle={{
@@ -112,6 +114,7 @@ export default function SeleccionRopa() {
       </View>
       <View style={{zIndex: openPiernas ? 1: 0 }}>
         <DropDownPicker
+          placeholder="Selecciona partes de abajo"
           categorySelectable={false}
           dropDownContainerStyle={{}}
           listParentLabelStyle={{
@@ -145,6 +148,7 @@ export default function SeleccionRopa() {
       </View>
       <View style={{zIndex: openPies ? 1: 0 }}>
         <DropDownPicker
+          placeholder="Selecciona calzados"
           categorySelectable={false}
           dropDownContainerStyle={{}}
           listParentLabelStyle={{
@@ -191,7 +195,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "top",
     paddingTop: StatusBar.currentHeight,
-    paddingBottom: 15,
+    paddingBottom: 64,
     paddingHorizontal: 15,
     justifyContent: "space-between",
   },
