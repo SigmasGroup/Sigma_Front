@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import SeleccionRopa from "./SeleccionRopa";
 
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "top",
-    paddingTop: currentHeight,
+
     paddingBottom: 64,
     paddingHorizontal: 15,
     justifyContent: "space-between",
