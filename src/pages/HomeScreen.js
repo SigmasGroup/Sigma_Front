@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import GlobalApi from "../services/GlobalApi";
 import DetalleConjunto from "./Detalle";
+import SeleccionRopa from "./SeleccionRopa";
 
 export default function HomeScreen() {
   return (

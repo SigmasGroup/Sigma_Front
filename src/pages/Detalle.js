@@ -45,7 +45,6 @@ export default function DetalleConjunto() {
             flexDirection: "column",
           }}
         >
-          {console.log(detalle)}
           {detalle.map((attributes, id) => (
             <View style={{ padding: 16 }} key={id}>
               <Text

@@ -1,6 +1,14 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, Button, ScrollView, StatusBar } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  ScrollView,
+  StatusBar,
+} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
+import GlobalApi from "../services/GlobalApi";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
@@ -18,25 +26,65 @@ export default function SeleccionRopa() {
       label: "Gorro de pescador",
       value: "gorritodepescador",
       parent: "Cabeza",
-    }]);
+    },
+  ]);
   const [torso, setItemsTorso] = useState([
     { label: "Torso", value: "Torso" },
     { label: "Polera", value: "polera", parent: "Torso" },
     { label: "Polo", value: "polo", parent: "Torso" },
     { label: "Camisa", value: "camisa", parent: "Torso" },
-    ]);
+  ]);
   const [piernas, setItemsPiernas] = useState([
     { label: "Piernas", value: "piernas" },
     { label: "Jeans slim azules", value: "jeans1", parent: "piernas" },
     { label: "Jeans anchos negros", value: "jeans2", parent: "piernas" },
     { label: "Chinos azules", value: "chinosazules", parent: "piernas" },
-    ]);
+  ]);
   const [pies, setItemsPies] = useState([
     { label: "Pies", value: "Pies" },
     { label: "Zapatos oxford", value: "zapatosoxford", parent: "Pies" },
     { label: "Zapatillas Adidas", value: "zapatillasadidas", parent: "Pies" },
     { label: "Jordan retro 4", value: "jordansitas", parent: "Pies" },
   ]);
+  const [item1, setItems1] = useState([]);
+  const [item2, setItems2] = useState([]);
+  const [item3, setItems3] = useState([]);
+  useEffect(() => {
+    getRopas();
+  }, []);
+
+  const getRopas = async () => {
+    const respueta = (await GlobalApi.getRopas()).data.data;
+    respueta.map((attributes) => {
+      setItemsTorso(
+        respueta
+          .filter((attributes) => attributes.attributes.tipoPrenda === "troso")
+          .map((attributes) => ({
+            label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
+            value: attributes.id,
+          }))
+      );
+
+      setItemsPiernas(
+        respueta
+          .filter(
+            (attributes) => attributes.attributes.tipoPrenda === "piernas"
+          )
+          .map((attributes) => ({
+            label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
+            value: attributes.id,
+          }))
+      );
+      setItemsPies(
+        respueta
+          .filter((attributes) => attributes.attributes.tipoPrenda === "pies")
+          .map((attributes) => ({
+            label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
+            value: attributes.id,
+          }))
+      );
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -44,7 +92,7 @@ export default function SeleccionRopa() {
         Selecciona tus prendas favoritas para que nosotros te recomendemos el
         outfit!
       </Text>
-      <View style={{zIndex: openCabeza ? 1: 0 }}>
+      <View style={{ zIndex: openCabeza ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona cabezas"
           categorySelectable={false}
@@ -78,7 +126,7 @@ export default function SeleccionRopa() {
           ]}
         />
       </View>
-      <View style={{zIndex: openTorso ? 1: 0 }}>
+      <View style={{ zIndex: openTorso ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona torsos"
           categorySelectable={false}
@@ -112,7 +160,7 @@ export default function SeleccionRopa() {
           ]}
         />
       </View>
-      <View style={{zIndex: openPiernas ? 1: 0 }}>
+      <View style={{ zIndex: openPiernas ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona partes de abajo"
           categorySelectable={false}
@@ -144,9 +192,9 @@ export default function SeleccionRopa() {
             "#00b4d8",
             "#e9c46a",
           ]}
-         />
+        />
       </View>
-      <View style={{zIndex: openPies ? 1: 0 }}>
+      <View style={{ zIndex: openPies ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona calzados"
           categorySelectable={false}

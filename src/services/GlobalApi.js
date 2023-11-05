@@ -8,7 +8,7 @@ const api = create({
   },
 });
 
-const getRopas = () => api.get("/api/ropas?populate[img][fields][0]=url");
+const getRopas = () => api.get("/api/ropas?populate");
 const getDetalle = () =>
   api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
 const getImg = ({ attributes }) => {
