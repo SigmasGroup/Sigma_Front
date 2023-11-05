@@ -212,7 +212,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "top",
-    paddingTop: StatusBar.currentHeight,
     paddingBottom: 64,
     paddingHorizontal: 15,
     justifyContent: "space-between",
