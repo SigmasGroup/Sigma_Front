@@ -12,7 +12,7 @@ const getRopas = () => api.get("/api/ropas?populate");
 const getDetalle = () =>
   api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
 const getImg = ({ attributes }) => {
-  const { url } = attributes.img.data.attributes;
+  const { url } = attributes.img.data;
   return `http://sigma-l1x8.onrender.com${url}`;
 };
 export default { getRopas, getImg, getDetalle };

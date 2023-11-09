@@ -1,9 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import DetalleRopa from "../components/detalleRopa";
-import GlobalApi from "../services/GlobalApi";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 
-export default function DetalleConjunto() {
+import GlobalApi from "../services/GlobalApi";
+import DetalleConjunto from "../components/detalleConjunto";
+import Carousel from "react-native-snap-carousel";
+
+export default function Detalle() {
   const [data, setData] = useState([]);
   const [detalle, setDetalle] = useState([]);
   useEffect(() => {
@@ -15,74 +24,32 @@ export default function DetalleConjunto() {
     setDetalle(respueta);
   };
 
-  useEffect(() => {
-    // Llama a esta función cuando detalle cambie
-    getDetalle();
-  }, [detalle]);
-
-  const getDetalle = () => {
-    if (detalle.length) {
-      ropas = detalle.map((x) => {
-        return x.attributes.ropas.data;
-      });
-      setData(...ropas);
-    }
-  };
-
   return (
     <View>
-      {detalle.length ? (
-        <View
-          style={{
-            maxWidth: 340,
-            backgroundColor: "white",
-            borderWidth: 1,
-            borderRadius: 8,
-            shadowColor: "black",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.1,
-            marginBottom: 16,
-            flexDirection: "column",
-          }}
-        >
-          {detalle.map((attributes, id) => (
-            <View style={{ padding: 16 }} key={id}>
-              <Text
-                style={{
-                  fontSize: 24,
-                  fontWeight: "bold",
-                  color: "gray",
-                  width: 280,
-                }}
-              >
-                {attributes.attributes.nombre}
-              </Text>
-              <Text style={{ marginTop: 8, fontSize: 14, color: "gray" }}>
-                {attributes.attributes.descripcion}
-              </Text>
-            </View>
-          ))}
-          <View style={{ flex: 1, justifyContent: "center" }}>
-            {data.map(
-              ({ attributes, id }) => (
-                <DetalleRopa key={id} {...attributes} />
-              )
-              // console.log(attributes)
-            )}
+      <ScrollView>
+        {detalle.length ? (
+          <View
+            style={{
+              flex: 1,
+            }}
+          >
+            {/* <Carousel
+              data={detalle}
+              renderItem={detalle.map(({ attributes, id }) => (
+                <DetalleConjunto key={id} {...attributes} />
+              ))}
+              sliderWidth={Dimensions.get("screen").width}
+              itemWidth={500}
+              layout="tinder"
+            /> */}
+            {detalle.map(({ attributes, id }) => (
+              <DetalleConjunto key={id} {...attributes} />
+            ))}
           </View>
-        </View>
-      ) : (
-        <View></View>
-      )}
+        ) : (
+          <View></View>
+        )}
+      </ScrollView>
     </View>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });

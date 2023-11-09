@@ -99,6 +99,8 @@ export default function SeleccionRopaComunida() {
           setItems={setItemsCabeza}
           theme="DARK"
           multiple={true}
+          max={4}
+          min={1}
           mode="BADGE"
           badgeDotColors={[
             "#e76f51",
@@ -128,6 +130,8 @@ export default function SeleccionRopaComunida() {
           setItems={setItemsTorso}
           theme="DARK"
           multiple={true}
+          max={4}
+          min={1}
           mode="BADGE"
           badgeDotColors={[
             "#e76f51",
@@ -157,6 +161,8 @@ export default function SeleccionRopaComunida() {
           setItems={setItemsPiernas}
           theme="DARK"
           multiple={true}
+          max={4}
+          min={1}
           mode="BADGE"
           badgeDotColors={[
             "#e76f51",
@@ -186,6 +192,8 @@ export default function SeleccionRopaComunida() {
           setItems={setItemsPies}
           theme="DARK"
           multiple={true}
+          max={4}
+          min={1}
           mode="BADGE"
           badgeDotColors={[
             "#e76f51",

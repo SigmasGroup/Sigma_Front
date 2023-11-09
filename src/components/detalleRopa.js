@@ -23,14 +23,15 @@ export default function DetalleRopa(attributes) {
             maxHeight: 90,
           }}
         >
-          <Image
+          {/* <Image
             src={GlobalApi.getImg({ attributes })}
             style={{
               width: 64,
               height: 64,
               borderRadius: 32,
             }}
-          />
+          /> */}
+          {console.log(attributes.img.data)}
           <View style={{ flex: 1, marginHorizontal: 12 }}>
             <Text style={{ fontSize: 16, fontWeight: "bold", color: "gray" }}>
               {attributes.nombre}
