@@ -5,7 +5,7 @@ import GlobalApi from "../services/GlobalApi";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
-export default function SeleccionRopa() {
+export default function SeleccionRopaComunida() {
   const [value, setValue] = useState([]);
   const [openCabeza, setOpenCabeza] = useState(false);
   const [openTorso, setOpenTorso] = useState(false);
@@ -61,9 +61,9 @@ export default function SeleccionRopa() {
     setItemsPiernas(
       respueta
         .filter((attributes) => attributes.attributes.tipoPrenda === "piernas")
-        .map((attributes) => ({
-          label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
-          value: attributes.id,
+        .map(({ attributes, id }) => ({
+          label: `${attributes.nombre}    ${attributes.color}    ${attributes.encaje}`,
+          value: { id: id.toString(), tipo: attributes.tipoPrenda },
         }))
     );
     setItemsPies(
@@ -99,6 +99,8 @@ export default function SeleccionRopa() {
           setItems={setItemsCabeza}
           theme="DARK"
           multiple={true}
+          max={4}
+          min={1}
           mode="BADGE"
           badgeDotColors={[
             "#e76f51",
@@ -128,6 +130,8 @@ export default function SeleccionRopa() {
           setItems={setItemsTorso}
           theme="DARK"
           multiple={true}
+          max={4}
+          min={1}
           mode="BADGE"
           badgeDotColors={[
             "#e76f51",
@@ -150,13 +154,14 @@ export default function SeleccionRopa() {
           }}
           open={openPiernas}
           onOpen={onOpenPiernas}
-          value={value}
           items={piernas}
           setOpen={setOpenPiernas}
           setValue={setValue}
           setItems={setItemsPiernas}
           theme="DARK"
           multiple={true}
+          max={4}
+          min={1}
           mode="BADGE"
           badgeDotColors={[
             "#e76f51",
@@ -186,6 +191,8 @@ export default function SeleccionRopa() {
           setItems={setItemsPies}
           theme="DARK"
           multiple={true}
+          max={4}
+          min={1}
           mode="BADGE"
           badgeDotColors={[
             "#e76f51",
@@ -203,6 +210,7 @@ export default function SeleccionRopa() {
         color="#b880e7"
         onPress={() => console.log("wena")}
       />
+      {console.log(value)}
     </View>
   );
 }

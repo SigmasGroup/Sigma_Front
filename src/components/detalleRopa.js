@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView } from "react-native";
 import GlobalApi from "../services/GlobalApi";
 
 export default function DetalleRopa(attributes) {
+  const img = GlobalApi.getImg({ attributes });
   return (
     <View style={{}}>
       <View
@@ -31,6 +32,7 @@ export default function DetalleRopa(attributes) {
               borderRadius: 32,
             }}
           />
+          {console.log(attributes.img.data.attributes)}
           <View style={{ flex: 1, marginHorizontal: 12 }}>
             <Text style={{ fontSize: 16, fontWeight: "bold", color: "gray" }}>
               {attributes.nombre}

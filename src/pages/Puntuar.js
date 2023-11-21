@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import SeleccionRopaComunida from "./SeleccionarRopaComunida";
 
 export default function Puntuar() {
   return (
     <View style={styles.container}>
-      <Text>Puntuar</Text>
-      <StatusBar style="auto" />
+      <SeleccionRopaComunida />
     </View>
   );
 }
@@ -13,8 +13,5 @@ export default function Puntuar() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
