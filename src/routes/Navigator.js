@@ -6,6 +6,7 @@ import Puntuar from "../pages/Puntuar";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../pages/login";
+import Registro from "../pages/Registro";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,11 @@ function MyStackLogin() {
         options={{ headerShown: false }}
         name="login"
         component={Login}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="registro"
+        component={Registro}
       />
       <Stack.Screen
         options={{ headerShown: false }}
