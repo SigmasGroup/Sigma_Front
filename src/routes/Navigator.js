@@ -6,6 +6,7 @@ import Puntuar from "../pages/Puntuar";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../pages/login";
+import Registro from "../pages/Registro";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,11 @@ function MyStackLogin() {
         options={{ headerShown: false }}
         name="login"
         component={Login}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="registro"
+        component={Registro}
       />
       <Stack.Screen
         options={{ headerShown: false }}
@@ -45,7 +51,7 @@ function MyTab() {
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: "purple",
+        tabBarActiveTintColor: "#b880e7",
         tabBarInactiveTintColor: "gray",
       })}
     >
