@@ -1,7 +1,14 @@
 import GlobalApi from "../services/GlobalApi";
 import DetalleRopa from "./detalleRopa";
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 
 export default function DetalleConjunto(atributes) {
   const [ropa, setRopa] = useState([]);

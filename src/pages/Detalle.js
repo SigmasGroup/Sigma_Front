@@ -10,7 +10,6 @@ import {
 
 import GlobalApi from "../services/GlobalApi";
 import DetalleConjunto from "../components/detalleConjunto";
-import Carousel from "react-native-snap-carousel";
 
 export default function Detalle() {
   const [data, setData] = useState([]);

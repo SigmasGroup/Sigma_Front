@@ -61,9 +61,9 @@ export default function SeleccionRopaComunida() {
     setItemsPiernas(
       respueta
         .filter((attributes) => attributes.attributes.tipoPrenda === "piernas")
-        .map((attributes) => ({
-          label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
-          value: attributes.id,
+        .map(({ attributes, id }) => ({
+          label: `${attributes.nombre}    ${attributes.color}    ${attributes.encaje}`,
+          value: { id: id.toString(), tipo: attributes.tipoPrenda },
         }))
     );
     setItemsPies(
@@ -154,7 +154,6 @@ export default function SeleccionRopaComunida() {
           }}
           open={openPiernas}
           onOpen={onOpenPiernas}
-          value={value}
           items={piernas}
           setOpen={setOpenPiernas}
           setValue={setValue}
@@ -211,6 +210,7 @@ export default function SeleccionRopaComunida() {
         color="#b880e7"
         onPress={() => console.log("wena")}
       />
+      {console.log(value)}
     </View>
   );
 }
