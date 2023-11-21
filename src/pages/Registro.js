@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,21 +10,16 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import GlobalApi from "../services/GlobalApi";
 
-
-// const navigation = useNavigation();
-
-const Login = () => {
+const Registro = () => {
   const navigation = useNavigation();
-  // Tu función para iniciar sesión utilizando la configuración de la API
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  
 
   const handleRegistro = async () => {
     try {
       // Aquí realizamos la solicitud de registro usando el método postUser de GlobalApi
-      await GlobalApi.postUserLogin(email, password);
+      await GlobalApi.postUser(username, email, password);
 
       // Si la solicitud es exitosa, puedes realizar acciones adicionales, como navegar a la pantalla principal
       navigation.replace("home");
@@ -38,13 +33,24 @@ const Login = () => {
     <View style={styles.container}>
       <Image source={require("../../assets/Sigma2.png")} style={styles.image} />
       <View style={styles.card}>
-        {/* <Text style={styles.title}>Inicia Sesion En Sigma!</Text> */}
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Tu email</Text>
-          <TextInput style={styles.input} placeholder="nombre@email.cl" onChangeText={(text) => setEmail(text)} />
+          <Text style={styles.label}>Tu nombre de usuario</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Tu nombre de usuario"
+            onChangeText={(text) => setUsername(text)}
+          />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Tu contrasena</Text>
+          <Text style={styles.label}>Tu email</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="nombre@email.cl"
+            onChangeText={(text) => setEmail(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Tu contraseña</Text>
           <TextInput
             style={styles.input}
             placeholder="•••••••••••"
@@ -52,24 +58,20 @@ const Login = () => {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        <View style={styles.forgotPasswordContainer}>
-          <Text style={styles.forgotPassword}>Olvidaste tu contrasena?</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Iniciar Sesion</Text>
+        <TouchableOpacity onPress={handleRegistro} style={styles.button}>
+          <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>
         <Text style={styles.registerText}>
-          No estas registrado?{" "}
+          ¿Ya tienes una cuenta?{" "}
           <Text
             style={styles.registerLink}
-            onPress={() => navigation.replace("registro")}
+            onPress={() => navigation.replace("login")}
           >
-            Crear cuenta
+            Iniciar sesión
           </Text>
         </Text>
       </View>
+      {console.log(username, email, password)}
     </View>
   );
 };
@@ -160,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Registro;

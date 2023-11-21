@@ -8,11 +8,24 @@ const api = create({
   },
 });
 
-const getRopas = () => api.get("/api/ropas?populate[img][fields][0]=url");
+const postUser = (username, email, password) =>
+  api.post("/api/auth/local/register", {
+    username: username,
+    email: email,
+    password: password,
+  });
+
+const postUserLogin = (email,password) =>
+  api.post("/api/auth/local", {
+    identifier: email,
+    password: password,
+});
+
+const getRopas = () => api.get("/api/ropas?populate");
 const getDetalle = () =>
   api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
 const getImg = ({ attributes }) => {
-  const { url } = attributes.img.data.attributes;
+  const { url } = attributes.img.data;
   return `http://sigma-l1x8.onrender.com${url}`;
 };
-export default { getRopas, getImg, getDetalle };
+export default { getRopas, getImg, getDetalle, postUser,postUserLogin };
