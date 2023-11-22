@@ -53,6 +53,7 @@ function MyTab() {
         },
         tabBarActiveTintColor: "#b880e7",
         tabBarInactiveTintColor: "gray",
+        tabBarHideOnKeyboard: true,
       })}
     >
       <Tab.Screen name="Conjuntos" component={HomeScreen} />

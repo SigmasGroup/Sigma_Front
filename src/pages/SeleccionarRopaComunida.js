@@ -1,5 +1,12 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, StyleSheet, Text, Button, StatusBar } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  StatusBar,
+  TextInput,
+} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import GlobalApi from "../services/GlobalApi";
 
@@ -7,39 +14,26 @@ import GlobalApi from "../services/GlobalApi";
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
 export default function SeleccionRopaComunida() {
   const [value, setValue] = useState([]);
-  const [openCabeza, setOpenCabeza] = useState(false);
   const [openTorso, setOpenTorso] = useState(false);
   const [openPiernas, setOpenPiernas] = useState(false);
   const [openPies, setOpenPies] = useState(false);
-  const onOpenCabeza = useCallback(() => {
-    setOpenTorso(false);
-    setOpenPiernas(false);
-    setOpenPies(false);
-  }, []);
+  const [titulo, setTitulo] = useState(""); // Nuevo state para el título
+  const [descripcion, setDescripcion] = useState(""); // Nuevo state para la descripción
+
   const onOpenTorso = useCallback(() => {
-    setOpenCabeza(false);
     setOpenPiernas(false);
     setOpenPies(false);
   }, []);
   const onOpenPiernas = useCallback(() => {
     setOpenTorso(false);
-    setOpenCabeza(false);
+
     setOpenPies(false);
   }, []);
   const onOpenPies = useCallback(() => {
     setOpenTorso(false);
     setOpenPiernas(false);
-    setOpenCabeza(false);
   }, []);
-  const [cabeza, setItemsCabeza] = useState([
-    { label: "uwu", value: "Cabeza" },
-    { label: "Gorro de lana", value: "gorritodelana" },
-    { label: "Yokie", value: "yokie" },
-    {
-      label: "Gorro de pescador",
-      value: "gorritodepescador",
-    },
-  ]);
+
   const [torso, setItemsTorso] = useState([]);
   const [piernas, setItemsPiernas] = useState([]);
   const [pies, setItemsPies] = useState([]);
@@ -82,37 +76,19 @@ export default function SeleccionRopaComunida() {
         Selecciona tus prendas favoritas para que nosotros te recomendemos el
         outfit!
       </Text>
-      <View style={{ zIndex: openCabeza ? 1 : 0 }}>
-        <DropDownPicker
-          placeholder="Selecciona cabezas"
-          categorySelectable={true}
-          dropDownContainerStyle={{}}
-          listItemContainer={{
-            height: 100,
-          }}
-          open={openCabeza}
-          onOpen={onOpenCabeza}
-          value={value}
-          items={cabeza}
-          setOpen={setOpenCabeza}
-          setValue={setValue}
-          setItems={setItemsCabeza}
-          theme="DARK"
-          multiple={true}
-          max={4}
-          min={1}
-          mode="BADGE"
-          badgeDotColors={[
-            "#e76f51",
-            "#00b4d8",
-            "#e9c46a",
-            "#e76f51",
-            "#8ac926",
-            "#00b4d8",
-            "#e9c46a",
-          ]}
-        />
-      </View>
+      <TextInput
+        style={styles.input}
+        placeholder="Título"
+        value={titulo}
+        onChangeText={(text) => setTitulo(text)}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Descripción"
+        value={descripcion}
+        onChangeText={(text) => setDescripcion(text)}
+      />
+
       <View style={{ zIndex: openTorso ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona torsos"
@@ -227,5 +203,13 @@ const styles = StyleSheet.create({
   texto: {
     fontSize: 16,
     textAlign: "center",
+  },
+  input: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 10,
+    width: "100%",
   },
 });
