@@ -41,6 +41,7 @@ export default function Detalle() {
               itemWidth={500}
               layout="tinder"
             /> */}
+            {console.log("detalle test", detalle)}
             {detalle.map(({ attributes, id }) => (
               <DetalleConjunto key={id} {...attributes} />
             ))}

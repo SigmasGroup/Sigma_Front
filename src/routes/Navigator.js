@@ -7,6 +7,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../pages/login";
 import Registro from "../pages/Registro";
+import Detalle from "../pages/Detalle";
+import SeleccionRopaComunida from "../pages/SeleccionarRopaComunida";
+import DetalleUnico from "../pages/DetalleUnico";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -29,6 +32,18 @@ function MyStackLogin() {
         name="home"
         component={MyTab}
       />
+    </Stack.Navigator>
+  );
+}
+
+function StackCreacionConjunto() {
+  return (
+    <Stack.Navigator initialRouteName="SeleccionRopaComunidad">
+      <Stack.Screen
+        name="SeleccionRopaComunidad"
+        component={SeleccionRopaComunida}
+      />
+      <Stack.Screen name="Detalle" component={DetalleUnico} />
     </Stack.Navigator>
   );
 }
@@ -57,7 +72,11 @@ function MyTab() {
       })}
     >
       <Tab.Screen name="Conjuntos" component={HomeScreen} />
-      <Tab.Screen name="Puntuar Conjuntos" component={Puntuar} />
+      <Tab.Screen
+        name="Puntuar Conjuntos"
+        component={StackCreacionConjunto}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen name="Cuenta" component={MyAcount} />
     </Tab.Navigator>
   );

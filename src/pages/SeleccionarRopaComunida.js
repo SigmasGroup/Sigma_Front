@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import GlobalApi from "../services/GlobalApi";
+import { useNavigation } from "@react-navigation/native";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
@@ -19,6 +20,7 @@ export default function SeleccionRopaComunida() {
   const [openPies, setOpenPies] = useState(false);
   const [titulo, setTitulo] = useState(""); // Nuevo state para el título
   const [descripcion, setDescripcion] = useState(""); // Nuevo state para la descripción
+  const navigation = useNavigation();
 
   const onOpenTorso = useCallback(() => {
     setOpenPiernas(false);
@@ -55,9 +57,9 @@ export default function SeleccionRopaComunida() {
     setItemsPiernas(
       respueta
         .filter((attributes) => attributes.attributes.tipoPrenda === "piernas")
-        .map(({ attributes, id }) => ({
-          label: `${attributes.nombre}    ${attributes.color}    ${attributes.encaje}`,
-          value: { id: id.toString(), tipo: attributes.tipoPrenda },
+        .map((attributes) => ({
+          label: `${attributes.attributes.nombre}    ${attributes.attributes.color}    ${attributes.attributes.encaje}`,
+          value: attributes.id,
         }))
     );
     setItemsPies(
@@ -68,6 +70,31 @@ export default function SeleccionRopaComunida() {
           value: attributes.id,
         }))
     );
+  };
+
+  const handleCreacion = async () => {
+    try {
+      // await GlobalApi.postConjunto(titulo, descripcion, value);
+      const respuesta = await GlobalApi.postConjunto(
+        titulo,
+        descripcion,
+        value
+      );
+
+      // Si la respuesta contiene datos, navega a la pantalla Detalle pasando esos datos
+      if (respuesta && respuesta.data) {
+        const datos = respuesta.data;
+        console.log(datos.data.id);
+        navigation.navigate("Detalle", { data: datos.data.id });
+        setValue([]);
+        setTitulo("");
+        setDescripcion("");
+      } else {
+        console.warn("La respuesta del servidor no contiene datos.");
+      }
+    } catch (error) {
+      console.error("Error de creacion:", error);
+    }
   };
 
   return (
@@ -130,6 +157,7 @@ export default function SeleccionRopaComunida() {
           }}
           open={openPiernas}
           onOpen={onOpenPiernas}
+          value={value}
           items={piernas}
           setOpen={setOpenPiernas}
           setValue={setValue}
@@ -184,7 +212,8 @@ export default function SeleccionRopaComunida() {
       <Button
         title="Crear Conjunto"
         color="#b880e7"
-        onPress={() => console.log("wena")}
+        onPress={handleCreacion}
+        disabled={!titulo || value.length < 3}
       />
       {console.log(value)}
     </View>
