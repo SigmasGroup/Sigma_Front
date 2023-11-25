@@ -8,7 +8,6 @@ const api = create({
   },
 });
 
-
 const postUser = (username, email, password) =>
   api.post("/api/auth/local/register", {
     username: username,
@@ -16,20 +15,41 @@ const postUser = (username, email, password) =>
     password: password,
   });
 
-const postUserLogin = (email,password) =>
+const postUserLogin = (email, password) =>
   api.post("/api/auth/local", {
     identifier: email,
     password: password,
-});
-
+  });
 
 const getRopas = () => api.get("/api/ropas?populate");
 const getDetalle = () =>
   api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
 const getImg = ({ attributes }) => {
   const { url } = attributes.img.data.attributes;
-
-
   return `http://sigma-l1x8.onrender.com${url}`;
 };
-export default { getRopas, getImg, getDetalle, postUser,postUserLogin };
+const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
+  try {
+    const response = await api.put(`/api/conjuntos/${conjuntoId}`, {
+      data: {
+        puntuacion: nuevaPuntuacion,
+      },
+    });
+    if (response.ok) {
+      console.log(`Puntuación actualizada con éxito`);
+    } else {
+      console.error(`Error al actualizar la puntuación`);
+    }
+  } catch (error) {
+    console.error("Error al enviar la solicitud de actualización:", error);
+  }
+};
+
+export default {
+  getRopas,
+  getImg,
+  getDetalle,
+  postUser,
+  postUserLogin,
+  putPuntuacion,
+};

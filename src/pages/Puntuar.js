@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import SeleccionRopaComunida from "./SeleccionarRopaComunida";
+import VotacionPage from "./VotacionPage";
 
 export default function Puntuar() {
   return (
     <View style={styles.container}>
-      <SeleccionRopaComunida />
+      <VotacionPage />
     </View>
   );
 }
