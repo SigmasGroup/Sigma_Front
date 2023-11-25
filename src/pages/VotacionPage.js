@@ -52,7 +52,7 @@ const VotacionPage = () => {
 
   const handleLike = async () => {
     const conjuntoActual = conjuntos[currentIndex];
-    await GlobalApi.actualizarPuntuacion(
+    await GlobalApi.putPuntuacion(
       conjuntoActual.id,
       conjuntoActual.attributes.puntaje + 1
     );
@@ -67,7 +67,7 @@ const VotacionPage = () => {
 
   const handleDislike = async () => {
     const conjuntoActual = conjuntos[currentIndex];
-    await GlobalApi.actualizarPuntuacion(
+    await GlobalApi.putPuntuacion(
       conjuntoActual.id,
       conjuntoActual.attributes.puntaje - 1
     );
