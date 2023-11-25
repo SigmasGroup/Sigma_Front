@@ -21,11 +21,25 @@ const postUserLogin = (email, password) =>
     password: password,
   });
 
+const postConjunto = (name, descripcion, id) =>
+  api.post("/api/conjuntos", {
+    data: {
+      nombre: name,
+      descripcion: descripcion,
+      puntaje: 0,
+      ropas: id,
+    },
+  });
+
+
 const getRopas = () => api.get("/api/ropas?populate");
 const getDetalle = () =>
   api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
+const getDetalleUnico = (id) =>
+  api.get(`api/conjuntos/${id}?populate[ropas][populate][img][fields]=url`);
 const getImg = ({ attributes }) => {
   const { url } = attributes.img.data.attributes;
+
   return `http://sigma-l1x8.onrender.com${url}`;
 };
 const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
@@ -45,11 +59,17 @@ const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
   }
 };
 
+
 export default {
   getRopas,
   getImg,
   getDetalle,
   postUser,
   postUserLogin,
+
   putPuntuacion,
+
+  postConjunto,
+  getDetalleUnico,
+
 };
