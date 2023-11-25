@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  StyleSheet,
 } from "react-native";
 
 export default function DetalleConjunto(atributes) {
@@ -27,45 +28,51 @@ export default function DetalleConjunto(atributes) {
   };
 
   return (
-    <View>
-      <View
-        style={{
-          maxWidth: 340,
-          backgroundColor: "white",
-          borderWidth: 1,
-          borderRadius: 8,
-          shadowColor: "black",
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          marginBottom: 16,
-          flexDirection: "column",
-          flex: 2,
-        }}
-      >
-        <View style={{ padding: 16, flex: 2 }}>
-          <Text
-            style={{
-              fontSize: 24,
-              fontWeight: "bold",
-              color: "gray",
-              width: 280,
-            }}
-          >
-            {atributes.nombre}
-          </Text>
-          <Text style={{ marginTop: 8, fontSize: 14, color: "gray" }}>
-            {atributes.descripcion}
-          </Text>
+    <View style={styles.container}>
+      <View style={styles.cardContainer}>
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>{atributes.nombre}</Text>
+          <Text style={styles.description}>{atributes.descripcion}</Text>
         </View>
-        <View style={{ flex: 1, justifyContent: "center" }}>
+        <View style={{ flex: 4, justifyContent: "center" }}>
           {ropa.map(({ attributes, id }) => (
             <DetalleRopa key={id} {...attributes} />
           ))}
         </View>
       </View>
-
-      {console.log("atributes", ropa)}
-      {console.log(conjuto)}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  cardContainer: {
+    maxWidth: 340,
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    marginBottom: 16,
+    flexDirection: "column",
+    flex: 2,
+  },
+  contentContainer: {
+    padding: 16,
+    flex: 1,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "gray",
+    maxWidth: 280,
+  },
+  description: {
+    marginTop: 8,
+    fontSize: 14,
+    color: "gray",
+  },
+});

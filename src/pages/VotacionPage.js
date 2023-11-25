@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import GlobalApi from "../services/GlobalApi";
 import DetalleConjunto from "../components/detalleConjunto";
 
@@ -77,18 +84,26 @@ const VotacionPage = () => {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={{ flex: 7, flexWrap: "wrap" }}>
         <DetalleConjunto
           {...conjuntos[currentIndex].attributes}
           prendas={prendas}
         />
-
-        <Button title="Like" onPress={handleLike} />
-        <Button title="Pass" onPress={handlePass} />
-        <Button title="Dislike" onPress={handleDislike} />
       </View>
-    </ScrollView>
+
+      <View style={styles.containerButton}>
+        <TouchableOpacity style={styles.button} onPress={handleLike}>
+          <Text style={styles.buttonText}>Like</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handlePass}>
+          <Text style={styles.buttonText}>Pass</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleDislike}>
+          <Text style={styles.buttonText}>Dislike</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
@@ -96,11 +111,27 @@ export default VotacionPage;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "top",
-    paddingHorizontal: 10,
-    justifyContent: "space-evenly",
+    marginVertical: 20,
+  },
+  containerButton: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 16,
+    marginHorizontal: 20, // Ajusta el espacio horizontal entre los botones
+  },
+  button: {
+    width: 100,
+    paddingVertical: 10,
+    backgroundColor: "blue", // Puedes personalizar el color de fondo
+    borderRadius: 5,
+    alignItems: "center",
+    marginHorizontal: 10,
+  },
+  buttonText: {
+    color: "white", // Puedes personalizar el color del texto
+    fontWeight: "bold",
   },
 });
