@@ -80,6 +80,7 @@ export default function SeleccionRopaComunida() {
         descripcion,
         value
       );
+      console.log(respuesta);
 
       // Si la respuesta contiene datos, navega a la pantalla Detalle pasando esos datos
       if (respuesta && respuesta.data) {
@@ -215,7 +216,7 @@ export default function SeleccionRopaComunida() {
         onPress={handleCreacion}
         disabled={!titulo || value.length < 3}
       />
-      {console.log(value)}
+      {console.log(titulo)}
     </View>
   );
 }

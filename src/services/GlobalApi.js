@@ -22,7 +22,7 @@ const postUserLogin = (email, password) =>
   });
 
 const postConjunto = (name, descripcion, id) =>
-  api.post("/api/conjuntos", {
+  api.post("/api/conjuto-usuarios", {
     data: {
       nombre: name,
       descripcion: descripcion,
@@ -31,12 +31,15 @@ const postConjunto = (name, descripcion, id) =>
     },
   });
 
-
 const getRopas = () => api.get("/api/ropas?populate");
+const getDetalleComunidad = () =>
+  api.get("api/conjuto-usuarios?populate[ropas][populate][img][fields]=url");
 const getDetalle = () =>
   api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
 const getDetalleUnico = (id) =>
-  api.get(`api/conjuntos/${id}?populate[ropas][populate][img][fields]=url`);
+  api.get(
+    `api/conjuto-usuarios/${id}?populate[ropas][populate][img][fields]=url`
+  );
 const getImg = ({ attributes }) => {
   const { url } = attributes.img.data.attributes;
 
@@ -44,7 +47,7 @@ const getImg = ({ attributes }) => {
 };
 const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
   try {
-    const response = await api.put(`/api/conjuntos/${conjuntoId}`, {
+    const response = await api.put(`/api/conjuto-usuarios/${conjuntoId}`, {
       data: {
         puntuacion: nuevaPuntuacion,
       },
@@ -59,7 +62,6 @@ const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
   }
 };
 
-
 export default {
   getRopas,
   getImg,
@@ -71,5 +73,5 @@ export default {
 
   postConjunto,
   getDetalleUnico,
-
+  getDetalleComunidad,
 };

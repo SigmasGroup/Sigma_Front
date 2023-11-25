@@ -61,6 +61,8 @@ function MyTab() {
             iconName = focused ? "star" : "star-outline";
           } else if (route.name === "Cuenta") {
             iconName = focused ? "person-circle" : "person-circle-outline";
+          } else if (route.name === "Crear Conjunto") {
+            iconName = focused ? "add-circle" : "add-circle-outline";
           }
 
           // You can return any component that you like here!
@@ -74,9 +76,10 @@ function MyTab() {
       <Tab.Screen name="Conjuntos" component={HomeScreen} />
       <Tab.Screen
         name="Puntuar Conjuntos"
-        component={StackCreacionConjunto}
+        component={Puntuar}
         options={{ headerShown: false }}
       />
+      <Tab.Screen name="Crear Conjunto" component={StackCreacionConjunto} />
       <Tab.Screen name="Cuenta" component={MyAcount} />
     </Tab.Navigator>
   );

@@ -21,7 +21,7 @@ const VotacionPage = () => {
 
   const cargarConjuntos = async () => {
     try {
-      const respuesta = await GlobalApi.getDetalle();
+      const respuesta = await GlobalApi.getDetalleComunidad();
 
       if (respuesta.ok) {
         setConjuntos(respuesta.data.data);
