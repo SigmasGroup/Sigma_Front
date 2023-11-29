@@ -32,7 +32,7 @@ const Login = () => {
     }
   };
 
-  const handleRegistro = async () => {
+  const handleLogin = async () => {
     try {
       const response = await GlobalApi.postUserLogin(email, password);
       console.log("id", response.data.user.id);
@@ -79,7 +79,7 @@ const Login = () => {
         {/* <View style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPassword}>Olvidaste tu contrasena?</Text>
         </View> */}
-        <TouchableOpacity style={styles.button} onPress={handleRegistro}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Iniciar Sesion</Text>
         </TouchableOpacity>
         <Text style={styles.registerText}>
