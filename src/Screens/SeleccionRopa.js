@@ -157,7 +157,7 @@ export default function SeleccionRopa() {
         />
       </View>
       <Button
-        title="Crear Conjunto"
+        title="Filtrar Conjunto"
         color="#b880e7"
         onPress={() => navigation.navigate("Detalle")}
         disabled={value.length < 3}

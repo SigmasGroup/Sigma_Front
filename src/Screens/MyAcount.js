@@ -17,26 +17,27 @@ export default function MyAcount() {
       try {
         const storedUserId = await AsyncStorage.getItem("id");
         console.log("id", storedUserId);
-        setUserId(storedUserId);
+        const respueta = (await GlobalApi.getUser(storedUserId)).data.username;
+        setUser(respueta);
+        // setUserId(storedUserId);
       } catch (error) {
         console.error("Error al obtener el ID del usuario:", error);
       }
     };
+    // const getUser = async () => {
+    //   console.log(userId);
+
+    //   console.log("data", respueta);
+    // };
 
     getStoredUserId();
-    getUser();
+    // getUser();
   }, []);
-
-  const getUser = async () => {
-    console.log(userId);
-    const respueta = (await GlobalApi.getUser(userId)).data.username;
-    console.log("data", respueta);
-    setUser(respueta);
-  };
 
   const handleLogout = async () => {
     // Borrar el token de AsyncStorage al cerrar sesión
     await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("id");
     // Redirigir a la pantalla de inicio de sesión
     navigation.replace("login");
   };
