@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -20,15 +20,27 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    checkIfLoggedIn();
+  }, []); // El segundo parámetro vacío asegura que el efecto se ejecute solo una vez al montar el componente
+
+  const checkIfLoggedIn = async () => {
+    const token = await AsyncStorage.getItem("token");
+    if (token) {
+      // Si hay un token, navega directamente a la pantalla principal
+      navigation.replace("home");
+    }
+  };
+
   const handleRegistro = async () => {
     try {
-      // Aquí realizamos la solicitud de registro usando el método postUser de GlobalApi
       const response = await GlobalApi.postUserLogin(email, password);
-
+      console.log("id", response.data.user.id);
       // Verificar si la respuesta contiene un token de acceso
       if (response.data && response.data.jwt) {
         // Guardar el token en AsyncStorage para su uso posterior
         await AsyncStorage.setItem("token", response.data.jwt);
+        await AsyncStorage.setItem("id", response.data.user.id.toString());
 
         // Navegar a la pantalla principal
         navigation.replace("home");
@@ -64,9 +76,9 @@ const Login = () => {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        <View style={styles.forgotPasswordContainer}>
+        {/* <View style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPassword}>Olvidaste tu contrasena?</Text>
-        </View>
+        </View> */}
         <TouchableOpacity style={styles.button} onPress={handleRegistro}>
           <Text style={styles.buttonText}>Iniciar Sesion</Text>
         </TouchableOpacity>

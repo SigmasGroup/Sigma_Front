@@ -2,44 +2,31 @@ import React, { useState, useCallback, useEffect } from "react";
 import { View, StyleSheet, Text, Button, StatusBar } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import GlobalApi from "../services/GlobalApi";
+import { useNavigation } from "@react-navigation/native";
 
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
 export default function SeleccionRopa() {
   const [value, setValue] = useState([]);
-  const [openCabeza, setOpenCabeza] = useState(false);
+
   const [openTorso, setOpenTorso] = useState(false);
   const [openPiernas, setOpenPiernas] = useState(false);
   const [openPies, setOpenPies] = useState(false);
-  const onOpenCabeza = useCallback(() => {
-    setOpenTorso(false);
-    setOpenPiernas(false);
-    setOpenPies(false);
-  }, []);
+  const navigation = useNavigation();
+
   const onOpenTorso = useCallback(() => {
-    setOpenCabeza(false);
     setOpenPiernas(false);
     setOpenPies(false);
   }, []);
   const onOpenPiernas = useCallback(() => {
     setOpenTorso(false);
-    setOpenCabeza(false);
     setOpenPies(false);
   }, []);
   const onOpenPies = useCallback(() => {
     setOpenTorso(false);
     setOpenPiernas(false);
-    setOpenCabeza(false);
   }, []);
-  const [cabeza, setItemsCabeza] = useState([
-    { label: "uwu", value: "Cabeza" },
-    { label: "Gorro de lana", value: "gorritodelana" },
-    { label: "Yokie", value: "yokie" },
-    {
-      label: "Gorro de pescador",
-      value: "gorritodepescador",
-    },
-  ]);
+
   const [torso, setItemsTorso] = useState([]);
   const [piernas, setItemsPiernas] = useState([]);
   const [pies, setItemsPies] = useState([]);
@@ -82,35 +69,6 @@ export default function SeleccionRopa() {
         Selecciona tus prendas favoritas para que nosotros te recomendemos el
         outfit!
       </Text>
-      <View style={{ zIndex: openCabeza ? 1 : 0 }}>
-        <DropDownPicker
-          placeholder="Selecciona cabezas"
-          categorySelectable={true}
-          dropDownContainerStyle={{}}
-          listItemContainer={{
-            height: 100,
-          }}
-          open={openCabeza}
-          onOpen={onOpenCabeza}
-          value={value}
-          items={cabeza}
-          setOpen={setOpenCabeza}
-          setValue={setValue}
-          setItems={setItemsCabeza}
-          theme="DARK"
-          multiple={true}
-          mode="BADGE"
-          badgeDotColors={[
-            "#e76f51",
-            "#00b4d8",
-            "#e9c46a",
-            "#e76f51",
-            "#8ac926",
-            "#00b4d8",
-            "#e9c46a",
-          ]}
-        />
-      </View>
       <View style={{ zIndex: openTorso ? 1 : 0 }}>
         <DropDownPicker
           placeholder="Selecciona torsos"
@@ -201,7 +159,8 @@ export default function SeleccionRopa() {
       <Button
         title="Crear Conjunto"
         color="#b880e7"
-        onPress={() => console.log("wena")}
+        onPress={() => navigation.navigate("Detalle")}
+        disabled={value.length < 3}
       />
     </View>
   );

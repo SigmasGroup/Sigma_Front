@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import GlobalApi from "../services/GlobalApi";
-import DetalleConjunto from "../components/detalleConjunto";
+import DetalleConjunto from "./detalleConjunto";
 
 export default function DetalleUnico({ route }) {
   const [detalle, setDetalle] = useState([]);
@@ -27,7 +27,7 @@ export default function DetalleUnico({ route }) {
 
   const getRopas = async (id) => {
     const respueta = (await GlobalApi.getDetalleUnico(id)).data.data;
-    console.log("lala");
+
     setDetalle([respueta]);
   };
 

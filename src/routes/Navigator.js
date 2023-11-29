@@ -1,15 +1,15 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../pages/HomeScreen";
-import MyAcount from "../pages/MyAcount";
+import MyAcount from "../Screens/MyAcount";
 import { NavigationContainer } from "@react-navigation/native";
-import Puntuar from "../pages/Puntuar";
+import Puntuar from "../Screens/Puntuar";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "../pages/login";
-import Registro from "../pages/Registro";
-import Detalle from "../pages/Detalle";
-import SeleccionRopaComunida from "../pages/SeleccionarRopaComunida";
-import DetalleUnico from "../pages/DetalleUnico";
+import Login from "../Screens/login";
+import Registro from "../Screens/Registro";
+import SeleccionRopaComunida from "../Screens/SeleccionarRopaComunida";
+import DetalleUnico from "../components/DetalleUnico";
+import SeleccionRopa from "../Screens/SeleccionRopa";
+import Detalle from "../components/Detalle";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -39,11 +39,17 @@ function MyStackLogin() {
 function StackCreacionConjunto() {
   return (
     <Stack.Navigator initialRouteName="SeleccionRopaComunidad">
-      <Stack.Screen
-        name="SeleccionRopaComunidad"
-        component={SeleccionRopaComunida}
-      />
-      <Stack.Screen name="Detalle" component={DetalleUnico} />
+      <Stack.Screen name="Crear Conjuntos" component={SeleccionRopaComunida} />
+      <Stack.Screen name="Detalle Unico" component={DetalleUnico} />
+    </Stack.Navigator>
+  );
+}
+
+function StackFiltrarConjunto() {
+  return (
+    <Stack.Navigator initialRouteName="SeleccionRopa">
+      <Stack.Screen name="Conjuntos" component={SeleccionRopa} />
+      <Stack.Screen name="Detalle" component={Detalle} />
     </Stack.Navigator>
   );
 }
@@ -55,7 +61,7 @@ function MyTab() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Conjuntos") {
+          if (route.name === "Conjunto") {
             iconName = focused ? "shirt" : "shirt-outline";
           } else if (route.name === "Puntuar Conjuntos") {
             iconName = focused ? "star" : "star-outline";
@@ -73,13 +79,17 @@ function MyTab() {
         tabBarHideOnKeyboard: true,
       })}
     >
-      <Tab.Screen name="Conjuntos" component={HomeScreen} />
       <Tab.Screen
-        name="Puntuar Conjuntos"
-        component={Puntuar}
+        name="Conjunto"
+        component={StackFiltrarConjunto}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Crear Conjunto" component={StackCreacionConjunto} />
+      <Tab.Screen name="Puntuar Conjuntos" component={Puntuar} />
+      <Tab.Screen
+        name="Crear Conjunto"
+        component={StackCreacionConjunto}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen name="Cuenta" component={MyAcount} />
     </Tab.Navigator>
   );

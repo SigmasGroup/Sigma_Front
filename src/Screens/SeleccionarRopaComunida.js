@@ -80,13 +80,12 @@ export default function SeleccionRopaComunida() {
         descripcion,
         value
       );
-      console.log(respuesta);
 
       // Si la respuesta contiene datos, navega a la pantalla Detalle pasando esos datos
       if (respuesta && respuesta.data) {
         const datos = respuesta.data;
-        console.log(datos.data.id);
-        navigation.navigate("Detalle", { data: datos.data.id });
+
+        navigation.navigate("Detalle Unico", { data: datos.data.id });
         setValue([]);
         setTitulo("");
         setDescripcion("");
@@ -216,7 +215,6 @@ export default function SeleccionRopaComunida() {
         onPress={handleCreacion}
         disabled={!titulo || value.length < 3}
       />
-      {console.log(titulo)}
     </View>
   );
 }

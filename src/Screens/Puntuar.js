@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import VotacionPage from "./VotacionPage";
+import VotacionPage from "../components/VotacionPage";
 
 export default function Puntuar() {
   return (

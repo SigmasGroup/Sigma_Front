@@ -8,6 +8,8 @@ const api = create({
   },
 });
 
+// Post
+
 const postUser = (username, email, password) =>
   api.post("/api/auth/local/register", {
     username: username,
@@ -31,6 +33,7 @@ const postConjunto = (name, descripcion, id) =>
     },
   });
 
+//Get
 const getRopas = () => api.get("/api/ropas?populate");
 const getDetalleComunidad = () =>
   api.get("api/conjuto-usuarios?populate[ropas][populate][img][fields]=url");
@@ -45,6 +48,9 @@ const getImg = ({ attributes }) => {
 
   return `http://sigma-l1x8.onrender.com${url}`;
 };
+const getUser = (id) => api.get(`/api/users/${id}`);
+
+//Put
 const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
   try {
     const response = await api.put(`/api/conjuto-usuarios/${conjuntoId}`, {
@@ -74,4 +80,5 @@ export default {
   postConjunto,
   getDetalleUnico,
   getDetalleComunidad,
+  getUser,
 };

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import GlobalApi from "../services/GlobalApi";
-import DetalleConjunto from "../components/detalleConjunto";
+import DetalleConjunto from "./detalleConjunto";
 
 const VotacionPage = () => {
   const [conjuntos, setConjuntos] = useState([]);

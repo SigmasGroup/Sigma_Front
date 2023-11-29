@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 import GlobalApi from "../services/GlobalApi";
-import DetalleConjunto from "../components/detalleConjunto";
+import DetalleConjunto from "./detalleConjunto";
 
 export default function Detalle() {
   const [data, setData] = useState([]);
@@ -30,6 +30,8 @@ export default function Detalle() {
           <View
             style={{
               flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             {/* <Carousel
@@ -41,7 +43,7 @@ export default function Detalle() {
               itemWidth={500}
               layout="tinder"
             /> */}
-            {console.log("detalle test", detalle)}
+
             {detalle.map(({ attributes, id }) => (
               <DetalleConjunto key={id} {...attributes} />
             ))}
