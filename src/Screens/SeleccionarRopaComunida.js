@@ -11,6 +11,11 @@ import DropDownPicker from "react-native-dropdown-picker";
 import GlobalApi from "../services/GlobalApi";
 import { useNavigation } from "@react-navigation/native";
 
+const MIN_TITULO_LENGTH = 3;
+const MAX_TITULO_LENGTH = 30;
+const MIN_DESCRIPCION_LENGTH = 0;
+const MAX_DESCRIPCION_LENGTH = 200;
+
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
 export default function SeleccionRopaComunida() {
@@ -20,6 +25,8 @@ export default function SeleccionRopaComunida() {
   const [openPies, setOpenPies] = useState(false);
   const [titulo, setTitulo] = useState(""); // Nuevo state para el título
   const [descripcion, setDescripcion] = useState(""); // Nuevo state para la descripción
+  const [tituloError, setTituloError] = useState(null); // Nuevo state para el mensaje de error del título
+  const [descripcionError, setDescripcionError] = useState(null); // Nuevo state para el mensaje de error de la descripción
   const navigation = useNavigation();
 
   const onOpenTorso = useCallback(() => {
@@ -73,18 +80,37 @@ export default function SeleccionRopaComunida() {
   };
 
   const handleCreacion = async () => {
+    // Limpiar mensajes de error antes de realizar la validación
+    setTituloError(null);
+    setDescripcionError(null);
+
     try {
-      // await GlobalApi.postConjunto(titulo, descripcion, value);
+      if (
+        titulo.length < MIN_TITULO_LENGTH ||
+        titulo.length > MAX_TITULO_LENGTH
+      ) {
+        setTituloError("El título debe tener entre 3 y 30 caracteres.");
+        return;
+      }
+
+      if (
+        descripcion.length < MIN_DESCRIPCION_LENGTH ||
+        descripcion.length > MAX_DESCRIPCION_LENGTH
+      ) {
+        setDescripcionError(
+          "La descripción debe tener entre 10 y 200 caracteres."
+        );
+        return;
+      }
+
       const respuesta = await GlobalApi.postConjunto(
         titulo,
         descripcion,
         value
       );
 
-      // Si la respuesta contiene datos, navega a la pantalla Detalle pasando esos datos
       if (respuesta && respuesta.data) {
         const datos = respuesta.data;
-
         navigation.navigate("Detalle Unico", { data: datos.data.id });
         setValue([]);
         setTitulo("");
@@ -93,10 +119,9 @@ export default function SeleccionRopaComunida() {
         console.warn("La respuesta del servidor no contiene datos.");
       }
     } catch (error) {
-      console.error("Error de creacion:", error);
+      console.error("Error de creación:", error);
     }
   };
-
   return (
     <View style={styles.container}>
       <Text style={styles.texto}>
@@ -107,14 +132,25 @@ export default function SeleccionRopaComunida() {
         style={styles.input}
         placeholder="Título"
         value={titulo}
-        onChangeText={(text) => setTitulo(text)}
+        onChangeText={(text) => {
+          setTitulo(text);
+          setTituloError(null);
+        }}
       />
+      {tituloError && <Text style={styles.errorText}>{tituloError}</Text>}
+
       <TextInput
         style={styles.input}
         placeholder="Descripción"
         value={descripcion}
-        onChangeText={(text) => setDescripcion(text)}
+        onChangeText={(text) => {
+          setDescripcion(text);
+          setDescripcionError(null);
+        }}
       />
+      {descripcionError && (
+        <Text style={styles.errorText}>{descripcionError}</Text>
+      )}
 
       <View style={{ zIndex: openTorso ? 1 : 0 }}>
         <DropDownPicker
@@ -218,6 +254,7 @@ export default function SeleccionRopaComunida() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
@@ -239,5 +276,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
     width: "100%",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    marginLeft: 5,
   },
 });
