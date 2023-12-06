@@ -23,6 +23,9 @@ const Login = () => {
     checkIfLoggedIn();
     checkEmail();
   }, []);
+  useEffect(() => {
+    checkEmail();
+  }, [email]);
 
   const checkIfLoggedIn = async () => {
     const token = await AsyncStorage.getItem("token");
@@ -34,6 +37,9 @@ const Login = () => {
   checkEmail = () => {
     if (email.includes("@") !== true && email.length >= 1) {
       setError("El correo electrónico debe contener un '@'");
+    } else {
+      console.log("lala");
+      setError("");
     }
   };
 

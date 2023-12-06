@@ -18,10 +18,27 @@ const Registro = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [error2, setError2] = useState("");
 
   useEffect(() => {
     checkEmail();
-  }, []);
+    checkPassword();
+  }, [email, password]);
+
+  checkEmail = () => {
+    if (email.includes("@") !== true && email.length >= 1) {
+      setError("El correo electrónico debe contener un '@'");
+    } else {
+      setError("");
+    }
+  };
+  checkPassword = () => {
+    if (password.length < 8 && password > 1) {
+      setError2("La contraseña tene que ser como minimo de 8 caracteres");
+    } else {
+      setError2("");
+    }
+  };
 
   const handleRegistro = async () => {
     try {
@@ -42,11 +59,6 @@ const Registro = () => {
     } catch (error) {
       console.error("Error de registro:", error);
       // Aquí puedes manejar el error, mostrar un mensaje de error, etc.
-    }
-  };
-  checkEmail = () => {
-    if (email.includes("@") !== true && email.length >= 1) {
-      setError("El correo electrónico debe contener un '@'");
     }
   };
 
@@ -80,6 +92,7 @@ const Registro = () => {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
+        {error2 !== "" && <Text style={styles.errorText}>{error2}</Text>}
         <TouchableOpacity
           onPress={handleRegistro}
           style={styles.button}
