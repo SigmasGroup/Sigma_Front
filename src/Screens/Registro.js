@@ -6,9 +6,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import GlobalApi from "../services/GlobalApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Registro = () => {
   const navigation = useNavigation();
@@ -19,10 +21,19 @@ const Registro = () => {
   const handleRegistro = async () => {
     try {
       // Aquí realizamos la solicitud de registro usando el método postUser de GlobalApi
-      await GlobalApi.postUser(username, email, password);
+      const response = await GlobalApi.postUser(username, email, password);
+      console.log(response.data);
+      if (response.data && response.data.jwt) {
+        await AsyncStorage.setItem("token", response.data.jwt);
+        await AsyncStorage.setItem("id", response.data.user.id.toString());
 
-      // Si la solicitud es exitosa, puedes realizar acciones adicionales, como navegar a la pantalla principal
-      navigation.replace("home");
+        navigation.replace("home");
+      } else {
+        // Si la respuesta no contiene un token, puedes manejarlo como un error de inicio de sesión
+        Alert.alert(
+          "Correo electrónico o nombre de usuario ya a sido utulizado"
+        );
+      }
     } catch (error) {
       console.error("Error de registro:", error);
       // Aquí puedes manejar el error, mostrar un mensaje de error, etc.

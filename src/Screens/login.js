@@ -35,7 +35,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await GlobalApi.postUserLogin(email, password);
-      console.log("id", response.data.user.id);
+
       // Verificar si la respuesta contiene un token de acceso
       if (response.data && response.data.jwt) {
         // Guardar el token en AsyncStorage para su uso posterior

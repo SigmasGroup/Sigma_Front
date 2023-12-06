@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import GlobalApi from "../services/GlobalApi";
 import DetalleConjunto from "./detalleConjunto";
@@ -17,7 +18,7 @@ const VotacionPage = () => {
 
   useEffect(() => {
     cargarConjuntos();
-  }, []);
+  }, [currentIndex]);
 
   const cargarConjuntos = async () => {
     try {
@@ -35,52 +36,65 @@ const VotacionPage = () => {
   };
 
   const cargarPrendas = async (conjuntos) => {
-    const conjuntoActual = conjuntos[currentIndex];
+    if (currentIndex < conjuntos.length) {
+      const conjuntoActual = conjuntos[currentIndex];
 
-    try {
-      const respuesta = await GlobalApi.getRopas(conjuntoActual.id);
+      try {
+        const respuesta = await GlobalApi.getRopas(conjuntoActual.id);
 
-      if (respuesta.ok) {
-        setPrendas(respuesta.data.data);
-      } else {
-        console.error("Error al cargar las prendas");
+        if (respuesta.ok) {
+          setPrendas(respuesta.data.data);
+        } else {
+          console.error("Error al cargar las prendas");
+        }
+      } catch (error) {
+        console.error("Error al obtener las prendas:", error);
       }
-    } catch (error) {
-      console.error("Error al obtener las prendas:", error);
     }
   };
 
   const handleLike = async () => {
-    const conjuntoActual = conjuntos[currentIndex];
-    await GlobalApi.putPuntuacion(
-      conjuntoActual.id,
-      conjuntoActual.attributes.puntaje + 1
-    );
-    setCurrentIndex(currentIndex + 1);
-    cargarPrendas(conjuntos);
+    if (currentIndex < conjuntos.length - 1) {
+      const conjuntoActual = conjuntos[currentIndex];
+      await GlobalApi.putPuntuacion(
+        conjuntoActual.id,
+        conjuntoActual.attributes.puntaje + 1
+      );
+      setCurrentIndex(currentIndex + 1);
+      cargarPrendas(conjuntos);
+    } else {
+      cargarConjuntos();
+      Alert.alert("No hay más conjuntos para votar.");
+    }
   };
 
   const handlePass = () => {
-    setCurrentIndex(currentIndex + 1);
-    cargarPrendas(conjuntos);
+    if (currentIndex < conjuntos.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      cargarPrendas(conjuntos);
+    } else {
+      cargarConjuntos();
+      Alert.alert("No hay más conjuntos para votar.");
+    }
   };
 
   const handleDislike = async () => {
-    const conjuntoActual = conjuntos[currentIndex];
-    await GlobalApi.putPuntuacion(
-      conjuntoActual.id,
-      conjuntoActual.attributes.puntaje - 1
-    );
-    setCurrentIndex(currentIndex + 1);
-    cargarPrendas(conjuntos);
+    if (currentIndex < conjuntos.length - 1) {
+      const conjuntoActual = conjuntos[currentIndex];
+      await GlobalApi.putPuntuacion(
+        conjuntoActual.id,
+        conjuntoActual.attributes.puntaje - 1
+      );
+      setCurrentIndex(currentIndex + 1);
+      cargarPrendas(conjuntos);
+    } else {
+      cargarConjuntos();
+      Alert.alert("No hay más conjuntos para votar.");
+    }
   };
 
   if (conjuntos.length === 0 || prendas.length === 0) {
     return <Text>Cargando conjuntos...</Text>;
-  }
-
-  if (currentIndex >= conjuntos.length) {
-    return <Text>No hay más conjuntos para votar.</Text>;
   }
 
   return (
@@ -120,18 +134,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 16,
-    marginHorizontal: 20, // Ajusta el espacio horizontal entre los botones
+    marginHorizontal: 20,
   },
   button: {
     width: 100,
     paddingVertical: 10,
-    backgroundColor: "blue", // Puedes personalizar el color de fondo
+    backgroundColor: "blue",
     borderRadius: 5,
     alignItems: "center",
     marginHorizontal: 10,
   },
   buttonText: {
-    color: "white", // Puedes personalizar el color del texto
+    color: "white",
     fontWeight: "bold",
   },
 });
