@@ -46,6 +46,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await GlobalApi.postUserLogin(email, password);
+      console.log(response.data);
 
       if (response.data && response.data.jwt) {
         await AsyncStorage.setItem("token", response.data.jwt);

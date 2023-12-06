@@ -24,7 +24,7 @@ const VotacionPage = () => {
     try {
       const respuesta = await GlobalApi.getDetalleComunidad();
 
-      if (respuesta.ok) {
+      if (respuesta.status === 200) {
         setConjuntos(respuesta.data.data);
         cargarPrendas(respuesta.data.data);
       } else {
@@ -42,7 +42,7 @@ const VotacionPage = () => {
       try {
         const respuesta = await GlobalApi.getRopas(conjuntoActual.id);
 
-        if (respuesta.ok) {
+        if (respuesta.status === 200) {
           setPrendas(respuesta.data.data);
         } else {
           console.error("Error al cargar las prendas");
