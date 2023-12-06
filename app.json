@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#b981e7"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "splash": {
@@ -24,11 +26,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/Sigma_icon.png",
         "backgroundColor": "#ffffff",
-        "permissions": ["INTERNET"]
-      }
+        "permissions": [
+          "INTERNET"
+        ]
+      },
+      "package": "com.segis.Sigma"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0e1c8a43-e580-4c27-8ceb-82778464c5c4"
+      }
     }
   }
 }
