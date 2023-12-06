@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,11 @@ const Registro = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    checkEmail();
+  }, []);
 
   const handleRegistro = async () => {
     try {
@@ -37,6 +42,11 @@ const Registro = () => {
     } catch (error) {
       console.error("Error de registro:", error);
       // Aquí puedes manejar el error, mostrar un mensaje de error, etc.
+    }
+  };
+  checkEmail = () => {
+    if (email.includes("@") !== true && email.length >= 1) {
+      setError("El correo electrónico debe contener un '@'");
     }
   };
 
@@ -60,6 +70,7 @@ const Registro = () => {
             onChangeText={(text) => setEmail(text)}
           />
         </View>
+        {error !== "" && <Text style={styles.errorText}>{error}</Text>}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Tu contraseña</Text>
           <TextInput
@@ -69,7 +80,15 @@ const Registro = () => {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        <TouchableOpacity onPress={handleRegistro} style={styles.button}>
+        <TouchableOpacity
+          onPress={handleRegistro}
+          style={styles.button}
+          disabled={
+            (error != "" && email < 1) ||
+            password.length < 8 ||
+            username.length < 1
+          }
+        >
           <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>
         <Text style={styles.registerText}>
@@ -170,6 +189,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 100,
     justifyContent: "center",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    marginTop: 8,
   },
 });
 

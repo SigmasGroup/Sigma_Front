@@ -12,23 +12,28 @@ import { useNavigation } from "@react-navigation/native";
 import GlobalApi from "../services/GlobalApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// const navigation = useNavigation();
-
 const Login = () => {
   const navigation = useNavigation();
-  // Tu función para iniciar sesión utilizando la configuración de la API
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     checkIfLoggedIn();
-  }, []); // El segundo parámetro vacío asegura que el efecto se ejecute solo una vez al montar el componente
+    checkEmail();
+  }, []);
 
   const checkIfLoggedIn = async () => {
     const token = await AsyncStorage.getItem("token");
     if (token) {
-      // Si hay un token, navega directamente a la pantalla principal
       navigation.replace("home");
+    }
+  };
+
+  checkEmail = () => {
+    if (email.includes("@") !== true && email.length >= 1) {
+      setError("El correo electrónico debe contener un '@'");
     }
   };
 
@@ -36,16 +41,12 @@ const Login = () => {
     try {
       const response = await GlobalApi.postUserLogin(email, password);
 
-      // Verificar si la respuesta contiene un token de acceso
       if (response.data && response.data.jwt) {
-        // Guardar el token en AsyncStorage para su uso posterior
         await AsyncStorage.setItem("token", response.data.jwt);
         await AsyncStorage.setItem("id", response.data.user.id.toString());
 
-        // Navegar a la pantalla principal
         navigation.replace("home");
       } else {
-        // Si la respuesta no contiene un token, puedes manejarlo como un error de inicio de sesión
         Alert.alert("Correo electrónico o contraseña incorrectos");
       }
     } catch (error) {
@@ -58,17 +59,21 @@ const Login = () => {
     <View style={styles.container}>
       <Image source={require("../../assets/Sigma2.png")} style={styles.image} />
       <View style={styles.card}>
-        {/* <Text style={styles.title}>Inicia Sesion En Sigma!</Text> */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Tu email</Text>
           <TextInput
             style={styles.input}
             placeholder="nombre@email.cl"
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => {
+              setEmail(text);
+              setError("");
+            }}
           />
+          {console.log(email.includes("@"))}
         </View>
+        {error !== "" && <Text style={styles.errorText}>{error}</Text>}
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Tu contrasena</Text>
+          <Text style={styles.label}>Tu contraseña</Text>
           <TextInput
             style={styles.input}
             placeholder="•••••••••••"
@@ -76,14 +81,15 @@ const Login = () => {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        {/* <View style={styles.forgotPasswordContainer}>
-          <Text style={styles.forgotPassword}>Olvidaste tu contrasena?</Text>
-        </View> */}
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Iniciar Sesion</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleLogin}
+          disabled={(error != "" && email < 1) || password.length < 1}
+        >
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
         <Text style={styles.registerText}>
-          No estas registrado?{" "}
+          ¿No estás registrado?{" "}
           <Text
             style={styles.registerLink}
             onPress={() => navigation.replace("registro")}
@@ -116,13 +122,6 @@ const styles = StyleSheet.create({
     shadowColor: "#F0F0F0",
     paddingTop: 0,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#b880e7",
-    textShadowRadius: 1.5,
-    textShadowColor: "black",
-  },
   inputContainer: {
     marginTop: 96,
   },
@@ -141,17 +140,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     marginBottom: 8,
-  },
-  forgotPasswordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 64,
-  },
-  forgotPassword: {
-    marginLeft: "auto",
-    fontSize: 14,
-    color: "blue",
-    textDecorationLine: "underline",
   },
   button: {
     backgroundColor: "#0F0F0F",
@@ -179,6 +167,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 100,
     justifyContent: "center",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    marginTop: 8,
   },
 });
 
