@@ -42,9 +42,21 @@ export default function MyAcount() {
     navigation.replace("login");
   };
 
+  const editUser = async () => {
+    // Borrar el token de AsyncStorage al cerrar sesión
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("id");
+    // Redirigir a la pantalla de inicio de sesión
+    navigation.replace("editUser");
+  };
+
   return (
     <View style={styles.container}>
       <Ionicons name="person" size={80} color="black" />
+      <Text style={styles.title}>Mi cuenta</Text>
+      <TouchableOpacity style={styles.button} onPress={editUser}>
+        <Text style={styles.buttonText}>Editar Cuenta</Text>
+      </TouchableOpacity>
       <Text style={styles.title}>{user}</Text>
 
       {/* Botón para cerrar sesión */}
