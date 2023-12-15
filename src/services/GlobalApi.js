@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_KEY, API_URL } from "../config";
 
 const api = axios.create({
-  baseURL: `http://sigma-l1x8.onrender.com`,
+  baseURL: `https://sigma-l1x8.onrender.com`,
   headers: {
     "X-API-Key": `e1ec7a1e07dde524eaf045738767a03571313b6f1fd28e4e9d885f3a288131bd677b8260bca0422d2b0992aa2aac1f888de03b0174ba97ea295334abf03600c50d19044fbb581c35056815154953b4ad073819f3f7d0cd37622284e3004909117795b1e3d7e804095ebfc73918932fb50ee030f9e8fe711aa29e2ea3e336b468`,
   },
@@ -23,29 +23,35 @@ const postUserLogin = (email, password) =>
     password: password,
   });
 
-const postConjunto = (name, descripcion, id) =>
-  api.post("/api/conjuto-usuarios", {
+const postConjunto = (name, descripcion, id, userId) =>
+  api.post("/api/conjuntos", {
     data: {
       nombre: name,
       descripcion: descripcion,
       puntaje: 0,
       ropas: id,
+      tipoConjunto: "comunidad",
+      user: userId,
     },
   });
 
 //Get
 const getRopas = () => api.get("/api/ropas?populate");
 const getDetalleComunidad = () =>
-  api.get("api/conjuto-usuarios?populate[ropas][populate][img][fields]=url");
+  api.get(
+    "api/conjuntos?populate[ropas][populate][img][fields]=url&[filters][tipoConjunto][$eq]=comunidad"
+  );
 const getDetalle = () =>
   api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
-const getDetalleUnico = (id) =>
+const getDetalleAdmin = () =>
   api.get(
-    `api/conjuto-usuarios/${id}?populate[ropas][populate][img][fields]=url`
+    "/api/conjuntos?populate[ropas][populate][img][fields]=url&[filters][tipoConjunto][$eq]=admin&populate[favorite][fields]=id"
   );
+const getDetalleUnico = (id) =>
+  api.get(`api/conjuntos/${id}?populate[ropas][populate][img][fields]=url`);
 const getImg = ({ attributes }) => {
   const { url } = attributes.img.data.attributes;
-  return `http://sigma-l1x8.onrender.com${url}`;
+  return `https://sigma-l1x8.onrender.com${url}`;
 };
 const getUser = (id) => api.get(`/api/users/${id}`);
 
@@ -66,6 +72,22 @@ const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
     console.error("Error al enviar la solicitud de actualización:", error);
   }
 };
+const putFavorite = async (conjuntoId, userId) => {
+  try {
+    const response = await api.put(`/api/conjuntos/${conjuntoId}`, {
+      data: {
+        favorite: userId,
+      },
+    });
+    if (response.status === 200) {
+      console.log(`favorite actualizada con éxito`);
+    } else {
+      console.error(`Error al actualizar la puntuación`);
+    }
+  } catch (error) {
+    console.error("Error al enviar la solicitud de actualización:", error);
+  }
+};
 
 export default {
   getRopas,
@@ -78,4 +100,6 @@ export default {
   getDetalleUnico,
   getDetalleComunidad,
   getUser,
+  getDetalleAdmin,
+  putFavorite,
 };

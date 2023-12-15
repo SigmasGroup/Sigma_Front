@@ -10,6 +10,7 @@ import {
 import DropDownPicker from "react-native-dropdown-picker";
 import GlobalApi from "../services/GlobalApi";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MIN_TITULO_LENGTH = 3;
 const MAX_TITULO_LENGTH = 30;
@@ -102,11 +103,12 @@ export default function SeleccionRopaComunida() {
         );
         return;
       }
-
+      const storedUserId = await AsyncStorage.getItem("id");
       const respuesta = await GlobalApi.postConjunto(
         titulo,
         descripcion,
-        value
+        value,
+        storedUserId
       );
 
       if (respuesta && respuesta.data) {

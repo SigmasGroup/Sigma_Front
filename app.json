@@ -11,21 +11,23 @@
       "resizeMode": "contain",
       "backgroundColor": "#b981e7"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "splash": {
         "image": "./assets/Sigma1.png",
         "resizeMode": "contain",
         "backgroundColor": "#b981e7"
-      }
+      },
+      "bundleIdentifier": "com.segis.Sigma"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/Sigma_icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["INTERNET"],
       "package": "com.segis.Sigma"
     },
     "web": {

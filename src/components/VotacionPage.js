@@ -14,8 +14,7 @@ import DetalleConjunto from "./detalleConjunto";
 const VotacionPage = () => {
   const [conjuntos, setConjuntos] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [prendas, setPrendas] = useState([]);
-
+  const dato = false;
   useEffect(() => {
     cargarConjuntos();
   }, [currentIndex]);
@@ -26,30 +25,12 @@ const VotacionPage = () => {
 
       if (respuesta.status === 200) {
         setConjuntos(respuesta.data.data);
-        cargarPrendas(respuesta.data.data);
+        // cargarPrendas(respuesta.data.data);
       } else {
         console.error("Error al cargar los conjuntos");
       }
     } catch (error) {
       console.error("Error al obtener los conjuntos:", error);
-    }
-  };
-
-  const cargarPrendas = async (conjuntos) => {
-    if (currentIndex < conjuntos.length) {
-      const conjuntoActual = conjuntos[currentIndex];
-
-      try {
-        const respuesta = await GlobalApi.getRopas(conjuntoActual.id);
-
-        if (respuesta.status === 200) {
-          setPrendas(respuesta.data.data);
-        } else {
-          console.error("Error al cargar las prendas");
-        }
-      } catch (error) {
-        console.error("Error al obtener las prendas:", error);
-      }
     }
   };
 
@@ -61,7 +42,6 @@ const VotacionPage = () => {
         conjuntoActual.attributes.puntaje + 1
       );
       setCurrentIndex(currentIndex + 1);
-      cargarPrendas(conjuntos);
     } else {
       cargarConjuntos();
       Alert.alert("No hay más conjuntos para votar.");
@@ -71,7 +51,6 @@ const VotacionPage = () => {
   const handlePass = () => {
     if (currentIndex < conjuntos.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      cargarPrendas(conjuntos);
     } else {
       cargarConjuntos();
       Alert.alert("No hay más conjuntos para votar.");
@@ -86,14 +65,13 @@ const VotacionPage = () => {
         conjuntoActual.attributes.puntaje - 1
       );
       setCurrentIndex(currentIndex + 1);
-      cargarPrendas(conjuntos);
     } else {
       cargarConjuntos();
       Alert.alert("No hay más conjuntos para votar.");
     }
   };
 
-  if (conjuntos.length === 0 || prendas.length === 0) {
+  if (conjuntos.length === 0) {
     return <Text>Cargando conjuntos...</Text>;
   }
 
@@ -101,8 +79,8 @@ const VotacionPage = () => {
     <View style={styles.container}>
       <View style={{ flex: 7, flexWrap: "wrap" }}>
         <DetalleConjunto
-          {...conjuntos[currentIndex].attributes}
-          prendas={prendas}
+          atributes={conjuntos[currentIndex].attributes}
+          id={conjuntos[currentIndex].id}
         />
       </View>
 
