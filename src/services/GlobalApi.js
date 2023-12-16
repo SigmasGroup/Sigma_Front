@@ -42,17 +42,17 @@ const getDetalleComunidad = () =>
     "api/conjuntos?populate[ropas][populate][img][fields]=url&[filters][tipoConjunto][$eq]=comunidad"
   );
 const getDetalle = () =>
-  api.get("api/conjuntos?populate[ropas][populate][img][fields]=url");
+  api.get("/api/conjuntos?populate[ropas][populate][img][fields]=url");
 const getDetalleAdmin = () =>
   api.get(
     "/api/conjuntos?populate[ropas][populate][img][fields]=url&[filters][tipoConjunto][$eq]=admin&populate[favorite][fields]=id"
   );
 const getDetalleUnico = (id) =>
-  api.get(`api/conjuntos/${id}?populate[ropas][populate][img][fields]=url`);
+  api.get(`/api/conjuntos/${id}?populate[ropas][populate][img][fields]=url`);
 
 const getDetalleFavorite = (id) =>
   api.get(
-    `api/conjuntos?populate[ropas][populate][img][fields]=url&[filters][tipoConjunto][$eq]=admin&populate[favorite][fields]=id&[filters][favorite][id][$eq]=3`
+    `/api/conjuntos?populate[ropas][populate][img][fields]=url&populate[favorite][fields]=id&[filters][favorite][id][$eq]=${id}`
   );
 
 const getImg = ({ attributes }) => {
