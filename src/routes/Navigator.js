@@ -92,7 +92,7 @@ function MyTab() {
       <Tab.Screen
         name="Conjunto"
         component={StackFiltrarConjunto}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, unmountOnBlur: true }}
       />
       <Tab.Screen name="Puntuar Conjuntos" component={Puntuar} />
       <Tab.Screen
@@ -103,7 +103,7 @@ function MyTab() {
       <Tab.Screen
         name="MiCuenta"
         component={StackMyAcount}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, unmountOnBlur: true }}
       />
     </Tab.Navigator>
   );

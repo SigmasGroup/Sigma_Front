@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-export default function DetalleConjunto({ atributes, id }) {
+export default function DetalleConjunto({ atributes, id, updateDetalle }) {
   const [ropa, setRopa] = useState([]);
   const [isBookmarked, setIsBookmarked] = useState();
   const [favoriteId, setFavoriteID] = useState([]);
@@ -54,15 +54,16 @@ export default function DetalleConjunto({ atributes, id }) {
     if (!isBookmarked) {
       const newFavoriteId = [...favoriteId, parseInt(storedUserId)];
       setFavoriteID(newFavoriteId);
-      GlobalApi.putFavorite(id, newFavoriteId);
+      await GlobalApi.putFavorite(id, newFavoriteId);
       console.log("guardado", newFavoriteId, "id", id);
     } else {
       const newFavoriteId = favoriteId.filter(
         (item) => item !== parseInt(storedUserId)
       );
       setFavoriteID(newFavoriteId);
-      GlobalApi.putFavorite(id, newFavoriteId);
+      await GlobalApi.putFavorite(id, newFavoriteId);
       console.log("eliminado", newFavoriteId, "id", id);
+      updateDetalle();
     }
   };
 
@@ -72,10 +73,13 @@ export default function DetalleConjunto({ atributes, id }) {
         {atributes.tipoConjunto === "admin" ? (
           <View style={styles.contentContainer}>
             <Text style={styles.title}>{atributes.nombre}</Text>
-            <TouchableOpacity onPress={handleBookmarkPress}>
+            <TouchableOpacity
+              onPress={handleBookmarkPress}
+              style={styles.bookmarkButton}
+            >
               <Ionicons
                 name={isBookmarked ? "bookmark" : "bookmark-outline"}
-                size={24}
+                size={30}
                 color="black"
               />
             </TouchableOpacity>
@@ -132,5 +136,11 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 14,
     color: "gray",
+  },
+  bookmarkButton: {
+    position: "absolute",
+    top: 15,
+    right: -60,
+    zIndex: 1,
   },
 });
