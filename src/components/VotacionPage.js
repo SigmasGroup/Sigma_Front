@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import GlobalApi from "../services/GlobalApi";
 import DetalleConjunto from "./detalleConjunto";
+import { Octicons } from "@expo/vector-icons";
 
 const VotacionPage = () => {
   const [conjuntos, setConjuntos] = useState([]);
@@ -86,13 +79,13 @@ const VotacionPage = () => {
 
       <View style={styles.containerButton}>
         <TouchableOpacity style={styles.button} onPress={handleLike}>
-          <Text style={styles.buttonText}>Like</Text>
+          <Octicons name="thumbsup" size={30} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handlePass}>
-          <Text style={styles.buttonText}>Pass</Text>
+        <TouchableOpacity style={styles.button2} onPress={handlePass}>
+          <Octicons name="skip" size={30} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleDislike}>
-          <Text style={styles.buttonText}>Dislike</Text>
+        <TouchableOpacity style={styles.button3} onPress={handleDislike}>
+          <Octicons name="thumbsdown" size={30} color="black" />
         </TouchableOpacity>
       </View>
     </View>
@@ -115,12 +108,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   button: {
-    width: 100,
+    width: 50,
     paddingVertical: 10,
-    backgroundColor: "blue",
-    borderRadius: 5,
+    backgroundColor: "#00FF00",
+    borderRadius: 75,
     alignItems: "center",
-    marginHorizontal: 10,
+    marginHorizontal: 20,
+  },
+  button2: {
+    width: 50,
+    paddingVertical: 10,
+    backgroundColor: "#007CFF",
+    borderRadius: 75,
+    alignItems: "center",
+    marginHorizontal: 20,
+  },
+  button3: {
+    width: 50,
+    paddingVertical: 10,
+    backgroundColor: "#FF0000",
+    borderRadius: 75,
+    alignItems: "center",
+    marginHorizontal: 20,
   },
   buttonText: {
     color: "white",

@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     textShadowColor: "black",
   },
   inputContainer: {
-    marginTop: 96,
+    marginTop: 38,
   },
   label: {
     marginBottom: 4,

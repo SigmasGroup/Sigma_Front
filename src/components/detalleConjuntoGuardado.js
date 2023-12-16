@@ -16,7 +16,7 @@ export default function DetalleGuardado() {
       const storedUserId = await AsyncStorage.getItem("id");
       console.log(storedUserId);
       const response = await GlobalApi.getDetalleFavorite(storedUserId);
-      setDetalle(response);
+      setDetalle(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
       // Puedes manejar el error de manera apropiada, como mostrar un mensaje al usuario.
