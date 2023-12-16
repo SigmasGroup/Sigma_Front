@@ -23,7 +23,6 @@ export default function DetalleGuardado() {
     try {
       setLoading(true);
       const response = await GlobalApi.getDetalleFavorite(storedUserId);
-      console.log("1", response.data.data);
       setDetalle(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);

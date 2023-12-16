@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#b981e7"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "splash": {
@@ -35,8 +33,12 @@
     },
     "extra": {
       "eas": {
-        "projectId": "0e1c8a43-e580-4c27-8ceb-82778464c5c4"
+        "projectId": "83bffe23-4b43-4e61-923e-2de526cfd2b2"
       }
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#C2185B",
+      "translucent": false
     }
   }
 }
