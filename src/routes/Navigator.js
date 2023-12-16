@@ -10,6 +10,7 @@ import SeleccionRopaComunida from "../Screens/SeleccionarRopaComunida";
 import DetalleUnico from "../components/DetalleUnico";
 import SeleccionRopa from "../Screens/SeleccionRopa";
 import Detalle from "../components/Detalle";
+import DetalleGuardado from "../components/detalleConjuntoGuardado";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -54,6 +55,15 @@ function StackFiltrarConjunto() {
   );
 }
 
+function StackMyAcount() {
+  return (
+    <Stack.Navigator initialRouteName="MyAcount">
+      <Stack.Screen name="Cuenta" component={MyAcount} />
+      <Stack.Screen name="DetalleGuardado" component={DetalleGuardado} />
+    </Stack.Navigator>
+  );
+}
+
 function MyTab() {
   return (
     <Tab.Navigator
@@ -65,7 +75,7 @@ function MyTab() {
             iconName = focused ? "shirt" : "shirt-outline";
           } else if (route.name === "Puntuar Conjuntos") {
             iconName = focused ? "star" : "star-outline";
-          } else if (route.name === "Cuenta") {
+          } else if (route.name === "MiCuenta") {
             iconName = focused ? "person-circle" : "person-circle-outline";
           } else if (route.name === "Crear Conjunto") {
             iconName = focused ? "add-circle" : "add-circle-outline";
@@ -90,7 +100,11 @@ function MyTab() {
         component={StackCreacionConjunto}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Cuenta" component={MyAcount} />
+      <Tab.Screen
+        name="MiCuenta"
+        component={StackMyAcount}
+        options={{ headerShown: false }}
+      />
     </Tab.Navigator>
   );
 }

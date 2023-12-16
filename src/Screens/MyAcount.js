@@ -8,30 +8,19 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 //en el usestate que dice setValue, se guardan los 'value' de los elementos seleccionados. en forma de lista []
 //tambien se puede llamar una lista para el setItems, por ahora deje esa array de ejemplo
 export default function MyAcount() {
-  const [userId, setUserId] = useState();
   const [user, setUser] = useState();
   const navigation = useNavigation();
   useEffect(() => {
-    // Función para obtener el ID del usuario al cargar la pantalla
     const getStoredUserId = async () => {
       try {
         const storedUserId = await AsyncStorage.getItem("id");
-        console.log("id", storedUserId);
         const respueta = (await GlobalApi.getUser(storedUserId)).data.username;
         setUser(respueta);
-        // setUserId(storedUserId);
       } catch (error) {
         console.error("Error al obtener el ID del usuario:", error);
       }
     };
-    // const getUser = async () => {
-    //   console.log(userId);
-
-    //   console.log("data", respueta);
-    // };
-
     getStoredUserId();
-    // getUser();
   }, []);
 
   const handleLogout = async () => {
@@ -41,25 +30,16 @@ export default function MyAcount() {
     // Redirigir a la pantalla de inicio de sesión
     navigation.replace("login");
   };
-
-  const editUser = async () => {
-    // Borrar el token de AsyncStorage al cerrar sesión
-    await AsyncStorage.removeItem("token");
-    await AsyncStorage.removeItem("id");
-    // Redirigir a la pantalla de inicio de sesión
-    navigation.replace("editUser");
-  };
-
   return (
     <View style={styles.container}>
       <Ionicons name="person" size={80} color="black" />
-      <Text style={styles.title}>Mi cuenta</Text>
-      <TouchableOpacity style={styles.button} onPress={editUser}>
-        <Text style={styles.buttonText}>Editar Cuenta</Text>
-      </TouchableOpacity>
       <Text style={styles.title}>{user}</Text>
-
-      {/* Botón para cerrar sesión */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("DetalleGuardado")}
+      >
+        <Text style={styles.buttonText}>conjuntos guardados</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Cerrar Sesión</Text>
       </TouchableOpacity>

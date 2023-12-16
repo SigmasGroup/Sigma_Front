@@ -49,6 +49,12 @@ const getDetalleAdmin = () =>
   );
 const getDetalleUnico = (id) =>
   api.get(`api/conjuntos/${id}?populate[ropas][populate][img][fields]=url`);
+
+const getDetalleFavorite = (id) =>
+  api.get(
+    `api/conjuntos?populate[ropas][populate][img][fields]=url&[filters][tipoConjunto][$eq]=admin&populate[favorite][fields]=id&[filters][favorite][id][$eq]=3`
+  );
+
 const getImg = ({ attributes }) => {
   const { url } = attributes.img.data.attributes;
   return `https://sigma-l1x8.onrender.com${url}`;
@@ -102,4 +108,5 @@ export default {
   getUser,
   getDetalleAdmin,
   putFavorite,
+  getDetalleFavorite,
 };
