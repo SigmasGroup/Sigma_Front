@@ -87,7 +87,7 @@ export default function MyAcount() {
         style={styles.button}
         onPress={() => navigation.navigate("DetalleGuardado")}
       >
-        <Text style={styles.buttonText}>conjuntos guardados</Text>
+        <Text style={styles.buttonText}>Conjuntos Guardados</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Cerrar Sesión</Text>

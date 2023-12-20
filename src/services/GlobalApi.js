@@ -64,9 +64,9 @@ const getUser = (id) => api.get(`/api/users/${id}`);
 // Put
 const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
   try {
-    const response = await api.put(`/api/conjuto-usuarios/${conjuntoId}`, {
+    const response = await api.put(`/api/conjuntos/${conjuntoId}`, {
       data: {
-        puntuacion: nuevaPuntuacion,
+        puntaje: nuevaPuntuacion,
       },
     });
     if (response.status === 200) {
@@ -94,6 +94,22 @@ const putFavorite = async (conjuntoId, userId) => {
     console.error("Error al enviar la solicitud de actualización:", error);
   }
 };
+const putTipoConjunto = async (conjuntoId) => {
+  try {
+    const response = await api.put(`/api/conjuntos/${conjuntoId}`, {
+      data: {
+        tipoConjunto: "admin",
+      },
+    });
+    if (response.status === 200) {
+      console.log(`conjunto actualizada con éxito`);
+    } else {
+      console.error(`Error al actualizar el tipo de conjunto`);
+    }
+  } catch (error) {
+    console.error("Error al enviar la solicitud de actualización:", error);
+  }
+};
 
 export default {
   getRopas,
@@ -109,4 +125,5 @@ export default {
   getDetalleAdmin,
   putFavorite,
   getDetalleFavorite,
+  putTipoConjunto,
 };

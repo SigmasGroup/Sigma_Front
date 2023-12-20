@@ -37,7 +37,7 @@ export default function DetalleUnico({ route }) {
         {detalle.length ? (
           <View style={styles.centerContainer}>
             {detalle.map(({ attributes, id }) => (
-              <DetalleConjunto key={id} {...attributes} />
+              <DetalleConjunto key={id} atributes={attributes} id={id} />
             ))}
           </View>
         ) : (

@@ -30,10 +30,14 @@ const VotacionPage = () => {
   const handleLike = async () => {
     if (currentIndex < conjuntos.length - 1) {
       const conjuntoActual = conjuntos[currentIndex];
+      console.log(currentIndex);
       await GlobalApi.putPuntuacion(
         conjuntoActual.id,
         conjuntoActual.attributes.puntaje + 1
       );
+      if (conjuntoActual.attributes.puntaje + 1 >= 100) {
+        await GlobalApi.putTipoConjunto(conjuntoActual.id);
+      }
       setCurrentIndex(currentIndex + 1);
     } else {
       cargarConjuntos();
