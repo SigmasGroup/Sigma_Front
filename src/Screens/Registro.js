@@ -11,6 +11,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import GlobalApi from "../services/GlobalApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Registro = () => {
   const navigation = useNavigation();
@@ -63,7 +64,7 @@ const Registro = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient colors={["#000", "#800080"]} style={styles.container}>
       <Image source={require("../../assets/Sigma2.png")} style={styles.image} />
       <View style={styles.card}>
         <View style={styles.inputContainer}>
@@ -115,7 +116,7 @@ const Registro = () => {
         </Text>
       </View>
       {console.log(username, email, password)}
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -126,14 +127,12 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     alignContent: "center",
     justifyContent: "center",
-    backgroundColor: "#F0F0F0",
   },
   card: {
     width: "100%",
     height: "60%",
     maxWidth: 360,
     padding: 16,
-    backgroundColor: "#F0F0F0",
     marginBottom: 16,
     borderRadius: 15,
     shadowColor: "#F0F0F0",
@@ -156,7 +155,6 @@ const styles = StyleSheet.create({
     color: "#0F0F0F",
   },
   input: {
-    backgroundColor: "#F0F0F0",
     borderWidth: 1,
     borderColor: "gray",
     color: "gray",
@@ -177,11 +175,19 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   button: {
-    backgroundColor: "#0F0F0F",
+    backgroundColor: "#800080",
     marginTop: 16,
     borderRadius: 8,
     alignItems: "center",
     paddingVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonText: {
     color: "white",

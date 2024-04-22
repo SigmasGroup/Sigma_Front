@@ -11,6 +11,8 @@ import DetalleUnico from "../components/DetalleUnico";
 import SeleccionRopa from "../Screens/SeleccionRopa";
 import Detalle from "../components/Detalle";
 import DetalleGuardado from "../components/detalleConjuntoGuardado";
+import WelcomeScreen from "../Screens/WelcomeScreen";
+import PrendasScreen from "../Screens/PrendasScreens";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -20,6 +22,11 @@ function MyStackLogin() {
     <Stack.Navigator>
       <Stack.Screen
         options={{ headerShown: false }}
+        name="welcome"
+        component={WelcomeScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
         name="login"
         component={Login}
       />
@@ -27,6 +34,11 @@ function MyStackLogin() {
         options={{ headerShown: false }}
         name="registro"
         component={Registro}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="prendas"
+        component={PrendasScreen}
       />
       <Stack.Screen
         options={{ headerShown: false }}

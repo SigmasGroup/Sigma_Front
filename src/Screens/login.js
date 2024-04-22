@@ -7,11 +7,13 @@ import {
   StyleSheet,
   Image,
   Alert,
+  Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import GlobalApi from "../services/GlobalApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { LinearGradient } from "expo-linear-gradient";
 const Login = () => {
   const navigation = useNavigation();
 
@@ -20,19 +22,19 @@ const Login = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    checkIfLoggedIn();
+    // checkIfLoggedIn();
     checkEmail();
   }, []);
-  useEffect(() => {
-    checkEmail();
-  }, [email]);
+  // useEffect(() => {
+  //   checkEmail();
+  // }, [email]);
 
-  const checkIfLoggedIn = async () => {
-    const token = await AsyncStorage.getItem("token");
-    if (token) {
-      navigation.replace("home");
-    }
-  };
+  // const checkIfLoggedIn = async () => {
+  //   const token = await AsyncStorage.getItem("token");
+  //   if (token) {
+  //     navigation.replace("home");
+  //   }
+  // };
 
   checkEmail = () => {
     if (email.includes("@") !== true && email.length >= 1) {
@@ -44,25 +46,23 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    try {
-      const response = await GlobalApi.postUserLogin(email, password);
-
-      if (response.data && response.data.jwt) {
-        await AsyncStorage.setItem("token", response.data.jwt);
-        await AsyncStorage.setItem("id", response.data.user.id.toString());
-
-        navigation.replace("home");
-      } else {
-        Alert.alert("Correo electrónico o contraseña incorrectos");
-      }
-    } catch (error) {
-      console.error("Error de registro:", error);
-      // Aquí puedes manejar el error, mostrar un mensaje de error, etc.
-    }
+    // try {
+    //   const response = await GlobalApi.postUserLogin(email, password);
+    //   if (response.data && response.data.jwt) {
+    //     await AsyncStorage.setItem("token", response.data.jwt);
+    //     await AsyncStorage.setItem("id", response.data.user.id.toString());
+    //     navigation.replace("home");
+    //   } else {
+    //     Alert.alert("Correo electrónico o contraseña incorrectos");
+    //   }
+    // } catch (error) {
+    //   console.error("Error de registro:", error);
+    //   // Aquí puedes manejar el error, mostrar un mensaje de error, etc.
+    // }
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient colors={["#000", "#800080"]} style={styles.container}>
       <Image source={require("../../assets/Sigma2.png")} style={styles.image} />
       <View style={styles.card}>
         <View style={styles.inputContainer}>
@@ -75,7 +75,6 @@ const Login = () => {
               setError("");
             }}
           />
-          {console.log(email.includes("@"))}
         </View>
         {error !== "" && <Text style={styles.errorText}>{error}</Text>}
         <View style={styles.inputContainer}>
@@ -104,7 +103,7 @@ const Login = () => {
           </Text>
         </Text>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -112,17 +111,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    flexWrap: "wrap",
     alignContent: "center",
     justifyContent: "center",
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "transparent",
   },
   card: {
     width: "100%",
     height: "60%",
     maxWidth: 360,
     padding: 16,
-    backgroundColor: "#F0F0F0",
     marginBottom: 16,
     borderRadius: 15,
     shadowColor: "#F0F0F0",
@@ -138,8 +135,7 @@ const styles = StyleSheet.create({
     color: "#0F0F0F",
   },
   input: {
-    backgroundColor: "#F0F0F0",
-    borderBottomWidth: 1,
+    borderWidth: 1,
     borderColor: "gray",
     color: "gray",
     fontSize: 14,
@@ -148,11 +144,19 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   button: {
-    backgroundColor: "#0F0F0F",
+    backgroundColor: "#800080",
     marginTop: 16,
     borderRadius: 8,
     alignItems: "center",
     paddingVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonText: {
     color: "white",

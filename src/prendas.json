@@ -1,0 +1,142 @@
+[
+  {
+    "nombre": "Camiseta básica",
+    "talla": "M",
+    "color": "blanco",
+    "img": "url_de_la_imagen",
+    "tipo": "torso"
+  },
+  {
+    "nombre": "Jeans ajustados",
+    "talla": "32",
+    "color": "azul",
+    "img": "url_de_la_imagen",
+    "tipo": "piernas"
+  },
+  {
+    "nombre": "Zapatillas deportivas",
+    "talla": "42",
+    "color": "negro",
+    "img": "url_de_la_imagen",
+    "tipo": "pies"
+  },
+  {
+    "nombre": "Gorra de béisbol",
+    "talla": "única",
+    "color": "rojo",
+    "img": "url_de_la_imagen",
+    "tipo": "cabeza"
+  },
+  {
+    "nombre": "Camisa de vestir",
+    "talla": "L",
+    "color": "azul claro",
+    "img": "url_de_la_imagen",
+    "tipo": "torso"
+  },
+  {
+    "nombre": "Shorts deportivos",
+    "talla": "S",
+    "color": "negro",
+    "img": "url_de_la_imagen",
+    "tipo": "piernas"
+  },
+  {
+    "nombre": "Suéter de lana",
+    "talla": "M",
+    "color": "gris",
+    "img": "url_de_la_imagen",
+    "tipo": "torso"
+  },
+  {
+    "nombre": "Pantalones cargo",
+    "talla": "L",
+    "color": "verde oliva",
+    "img": "url_de_la_imagen",
+    "tipo": "piernas"
+  },
+  {
+    "nombre": "Botas de montaña",
+    "talla": "40",
+    "color": "marrón",
+    "img": "url_de_la_imagen",
+    "tipo": "pies"
+  },
+  {
+    "nombre": "Sombrero de paja",
+    "talla": "única",
+    "color": "natural",
+    "img": "url_de_la_imagen",
+    "tipo": "cabeza"
+  },
+  {
+    "nombre": "Chaqueta acolchada",
+    "talla": "XL",
+    "color": "negro",
+    "img": "url_de_la_imagen",
+    "tipo": "torso"
+  },
+  {
+    "nombre": "Leggings deportivos",
+    "talla": "S",
+    "color": "morado",
+    "img": "url_de_la_imagen",
+    "tipo": "piernas"
+  },
+  {
+    "nombre": "Sandalias",
+    "talla": "38",
+    "color": "blanco",
+    "img": "url_de_la_imagen",
+    "tipo": "pies"
+  },
+  {
+    "nombre": "Gorra de lana",
+    "talla": "única",
+    "color": "negro",
+    "img": "url_de_la_imagen",
+    "tipo": "cabeza"
+  },
+  {
+    "nombre": "Polo de manga corta",
+    "talla": "M",
+    "color": "azul marino",
+    "img": "url_de_la_imagen",
+    "tipo": "torso"
+  },
+  {
+    "nombre": "Falda plisada",
+    "talla": "S",
+    "color": "rosa",
+    "img": "url_de_la_imagen",
+    "tipo": "piernas"
+  },
+  {
+    "nombre": "Botines",
+    "talla": "39",
+    "color": "negro",
+    "img": "url_de_la_imagen",
+    "tipo": "pies"
+  },
+  {
+    "nombre": "Gorra de béisbol",
+    "talla": "única",
+    "color": "blanco",
+    "img": "url_de_la_imagen",
+    "tipo": "cabeza"
+  },
+  {
+    "nombre": "Sudadera con capucha",
+    "talla": "L",
+    "color": "gris",
+    "img": "url_de_la_imagen",
+    "tipo": "torso"
+  },
+  {
+    "nombre": "Pantalones cortos",
+    "talla": "M",
+    "color": "azul",
+    "img": "url_de_la_imagen",
+    "tipo": "piernas"
+  }
+]
