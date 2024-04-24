@@ -63,7 +63,7 @@ const Login = () => {
 
   return (
     <LinearGradient colors={["#000", "#800080"]} style={styles.container}>
-      <Image source={require("../../assets/Sigma2.png")} style={styles.image} />
+      <Image source={require("../../assets/Sigma3.png")} style={styles.image} />
       <View style={styles.card}>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Tu email</Text>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     fontSize: 14,
     fontWeight: "bold",
-    color: "#0F0F0F",
+    color: "#ffffff",
   },
   input: {
     borderWidth: 1,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   registerText: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#0F0F0F",
+    color: "#ffffff",
     marginTop: 64,
   },
   registerLink: {
