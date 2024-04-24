@@ -57,13 +57,13 @@ const PrendasScreen = () => {
     return prendas.filter((prenda) => prenda.tipo === tipo);
   };
 
-  // Función para dividir las prendas en lotes de 5 para cada slider
-  const dividirPrendasPorSlider = (prendas) => {
-    const sliders = [];
-    for (let i = 0; i < prendas.length; i += 5) {
-      sliders.push(prendas.slice(i, i + 5));
+  // Función para dividir las prendas en lotes de 3 para cada fila
+  const dividirPrendasPorFila = (prendas) => {
+    const filas = [];
+    for (let i = 0; i < prendas.length; i += 3) {
+      filas.push(prendas.slice(i, i + 3));
     }
-    return sliders;
+    return filas;
   };
 
   return (
@@ -88,11 +88,11 @@ const PrendasScreen = () => {
           >
             <View style={styles.sliderContainer}>
               <Text style={styles.sliderTitle}>{tipo.toUpperCase()}</Text>
-              <ScrollView>
-                {dividirPrendasPorSlider(filtrarPrendasPorTipo(tipo)).map(
-                  (slider, sliderIndex) => (
-                    <View key={sliderIndex} style={styles.rowCard}>
-                      {slider.map((prenda, cardIndex) => (
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {dividirPrendasPorFila(filtrarPrendasPorTipo(tipo)).map(
+                  (fila, filaIndex) => (
+                    <View key={filaIndex} style={styles.rowContainer}>
+                      {fila.map((prenda, cardIndex) => (
                         <TouchableOpacity
                           key={cardIndex}
                           style={[
@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     alignItems: "center",
+    zIndex: 10,
   },
   sliderTitle: {
     fontSize: 20,
@@ -142,15 +143,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   cardTouchable: {
-    marginBottom: 10,
+    width: (Dimensions.get("window").width - 40) / 3, // Calcula el ancho de cada tarjeta (restando los márgenes)
+    marginBottom: 10, // Agrega un margen inferior para separar las filas
+    marginRight: 10, // Agrega un margen derecho para separar las tarjetas
   },
   selectedCard: {
     borderWidth: 2,
     borderColor: "blue",
   },
-  rowCard: {
+  rowContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
+    justifyContent: "space-between", // Alinea las tarjetas al espacio entre sí
+    marginBottom: 10, // Agrega un margen inferior para separar las filas
   },
   nextButton: {
     backgroundColor: "#800080",
@@ -166,6 +170,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    zIndex: 1,
   },
   buttonText: {
     color: "white",
@@ -173,4 +178,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
 export default PrendasScreen;
