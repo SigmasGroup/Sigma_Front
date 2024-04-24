@@ -59,6 +59,24 @@ const Login = () => {
     //   console.error("Error de registro:", error);
     //   // Aquí puedes manejar el error, mostrar un mensaje de error, etc.
     // }
+    try {
+      // Realiza el inicio de sesión
+
+      // Verifica si es la primera vez que se inicia sesión
+      const firstLogin = await AsyncStorage.getItem("firstLogin");
+      console.log(firstLogin);
+      if (!firstLogin) {
+        // Si es la primera vez que se inicia sesión, navega a la pantalla de prendas
+        // await AsyncStorage.setItem("firstLogin", "true");
+        navigation.replace("prendas");
+      } else {
+        // Si no es la primera vez, navega a la pantalla de inicio (home)
+        await AsyncStorage.removeItem("firstLogin");
+        navigation.replace("home");
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
   };
 
   return (
@@ -89,7 +107,7 @@ const Login = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={handleLogin}
-          disabled={(error != "" && email < 1) || password.length < 1}
+          // disabled={(error != "" && email < 1) || password.length < 1}
         >
           <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
