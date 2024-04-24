@@ -91,7 +91,7 @@ const PrendasScreen = () => {
               <ScrollView>
                 {dividirPrendasPorSlider(filtrarPrendasPorTipo(tipo)).map(
                   (slider, sliderIndex) => (
-                    <View key={sliderIndex}>
+                    <View key={sliderIndex} style={styles.rowCard}>
                       {slider.map((prenda, cardIndex) => (
                         <TouchableOpacity
                           key={cardIndex}
@@ -148,6 +148,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "blue",
   },
+  rowCard: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
   nextButton: {
     backgroundColor: "#800080",
     paddingVertical: 10,
@@ -155,6 +159,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     margin: 10,
     alignSelf: "center",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonText: {
     color: "white",

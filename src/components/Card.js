@@ -4,23 +4,19 @@ import { View, Text, StyleSheet, Image } from "react-native";
 const Card = ({ prenda }) => {
   return (
     <View style={styles.card}>
-      {/* <Image source={{ uri: prenda.img }} style={styles.image} /> */}
-      <View style={styles.details}>
-        <Text style={styles.name}>{prenda.nombre}</Text>
-        <Text style={styles.info}>Talla: {prenda.talla}</Text>
-        <Text style={styles.info}>Color: {prenda.color}</Text>
-      </View>
+      <Image source={{ uri: prenda.img }} style={styles.image} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: "row",
+    // flexDirection: "row",
     backgroundColor: "#fff",
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,
+    marginHorizontal: 2,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
