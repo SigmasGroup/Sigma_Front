@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -7,6 +8,7 @@
     "tipo": "torso"
   },
   {
+    "id": 2,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -14,6 +16,7 @@
     "tipo": "torso"
   },
   {
+    "id": 3,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -21,6 +24,7 @@
     "tipo": "torso"
   },
   {
+    "id": 4,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -28,6 +32,7 @@
     "tipo": "torso"
   },
   {
+    "id": 5,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -35,6 +40,7 @@
     "tipo": "torso"
   },
   {
+    "id": 6,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -42,6 +48,7 @@
     "tipo": "torso"
   },
   {
+    "id": 7,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -49,6 +56,7 @@
     "tipo": "torso"
   },
   {
+    "id": 8,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -56,6 +64,7 @@
     "tipo": "torso"
   },
   {
+    "id": 9,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -63,6 +72,7 @@
     "tipo": "torso"
   },
   {
+    "id": 10,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -70,6 +80,7 @@
     "tipo": "torso"
   },
   {
+    "id": 11,
     "nombre": "Camiseta básica",
     "talla": "M",
     "color": "blanco",
@@ -77,6 +88,7 @@
     "tipo": "torso"
   },
   {
+    "id": 12,
     "nombre": "Jeans ajustados",
     "talla": "32",
     "color": "azul",
@@ -84,6 +96,7 @@
     "tipo": "piernas"
   },
   {
+    "id": 13,
     "nombre": "Zapatillas deportivas",
     "talla": "42",
     "color": "negro",
@@ -91,6 +104,7 @@
     "tipo": "pies"
   },
   {
+    "id": 14,
     "nombre": "Gorra de béisbol",
     "talla": "única",
     "color": "rojo",
@@ -98,6 +112,7 @@
     "tipo": "cabeza"
   },
   {
+    "id": 15,
     "nombre": "Camisa de vestir",
     "talla": "L",
     "color": "azul claro",
@@ -105,6 +120,7 @@
     "tipo": "torso"
   },
   {
+    "id": 16,
     "nombre": "Shorts deportivos",
     "talla": "S",
     "color": "negro",
@@ -112,6 +128,7 @@
     "tipo": "piernas"
   },
   {
+    "id": 17,
     "nombre": "Suéter de lana",
     "talla": "M",
     "color": "gris",
@@ -119,6 +136,7 @@
     "tipo": "torso"
   },
   {
+    "id": 18,
     "nombre": "Pantalones cargo",
     "talla": "L",
     "color": "verde oliva",
@@ -126,6 +144,7 @@
     "tipo": "piernas"
   },
   {
+    "id": 19,
     "nombre": "Botas de montaña",
     "talla": "40",
     "color": "marrón",
@@ -133,6 +152,7 @@
     "tipo": "pies"
   },
   {
+    "id": 20,
     "nombre": "Sombrero de paja",
     "talla": "única",
     "color": "natural",
@@ -140,6 +160,7 @@
     "tipo": "cabeza"
   },
   {
+    "id": 21,
     "nombre": "Chaqueta acolchada",
     "talla": "XL",
     "color": "negro",
@@ -147,6 +168,7 @@
     "tipo": "torso"
   },
   {
+    "id": 22,
     "nombre": "Leggings deportivos",
     "talla": "S",
     "color": "morado",
@@ -154,6 +176,7 @@
     "tipo": "piernas"
   },
   {
+    "id": 23,
     "nombre": "Sandalias",
     "talla": "38",
     "color": "blanco",
@@ -161,6 +184,7 @@
     "tipo": "pies"
   },
   {
+    "id": 24,
     "nombre": "Gorra de lana",
     "talla": "única",
     "color": "negro",
@@ -168,6 +192,7 @@
     "tipo": "cabeza"
   },
   {
+    "id": 25,
     "nombre": "Polo de manga corta",
     "talla": "M",
     "color": "azul marino",
@@ -175,6 +200,7 @@
     "tipo": "torso"
   },
   {
+    "id": 26,
     "nombre": "Falda plisada",
     "talla": "S",
     "color": "rosa",
@@ -182,6 +208,7 @@
     "tipo": "piernas"
   },
   {
+    "id": 27,
     "nombre": "Botines",
     "talla": "39",
     "color": "negro",
@@ -189,6 +216,7 @@
     "tipo": "pies"
   },
   {
+    "id": 28,
     "nombre": "Gorra de béisbol",
     "talla": "única",
     "color": "blanco",
@@ -196,6 +224,7 @@
     "tipo": "cabeza"
   },
   {
+    "id": 29,
     "nombre": "Sudadera con capucha",
     "talla": "L",
     "color": "gris",
@@ -203,6 +232,7 @@
     "tipo": "torso"
   },
   {
+    "id": 30,
     "nombre": "Pantalones cortos",
     "talla": "M",
     "color": "azul",

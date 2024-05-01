@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const PrendasScreen = () => {
-  const [selectedCards, setSelectedCards] = useState([]);
+  const [selectedPrendas, setSelectedPrendas] = useState([]);
   const tiposPrenda = ["cabeza", "torso", "piernas", "pies"];
   const scrollViewRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
@@ -42,13 +42,11 @@ const PrendasScreen = () => {
   };
 
   // Función para manejar la selección de tarjetas
-  const handleSelectCard = (index) => {
-    if (selectedCards.includes(index)) {
-      setSelectedCards(
-        selectedCards.filter((cardIndex) => cardIndex !== index)
-      );
+  const handleSelectCard = (id) => {
+    if (selectedPrendas.includes(id)) {
+      setSelectedPrendas(selectedPrendas.filter((prendaId) => prendaId !== id));
     } else {
-      setSelectedCards([...selectedCards, index]);
+      setSelectedPrendas([...selectedPrendas, id]);
     }
   };
 
@@ -92,18 +90,20 @@ const PrendasScreen = () => {
                 {dividirPrendasPorFila(filtrarPrendasPorTipo(tipo)).map(
                   (fila, filaIndex) => (
                     <View key={filaIndex} style={styles.rowContainer}>
-                      {fila.map((prenda, cardIndex) => (
+                      {fila.map((prenda) => (
                         <TouchableOpacity
-                          key={cardIndex}
+                          key={prenda.id}
                           style={[
                             styles.cardTouchable,
-                            selectedCards.includes(cardIndex)
-                              ? styles.selectedCard
-                              : null,
+                            selectedPrendas.includes(prenda.id) &&
+                              styles.selectedCard,
                           ]}
-                          onPress={() => handleSelectCard(cardIndex)}
+                          onPress={() => handleSelectCard(prenda.id)}
                         >
-                          <Card prenda={prenda} />
+                          <Card
+                            prenda={prenda}
+                            selected={selectedPrendas.includes(prenda.id)}
+                          />
                         </TouchableOpacity>
                       ))}
                     </View>
@@ -141,15 +141,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
+    color: "white", // Ajustamos el color del texto
   },
   cardTouchable: {
-    width: (Dimensions.get("window").width - 40) / 3, // Calcula el ancho de cada tarjeta (restando los márgenes)
-    marginBottom: 10, // Agrega un margen inferior para separar las filas
-    marginRight: 10, // Agrega un margen derecho para separar las tarjetas
+    // width: (Dimensions.get("window").width - 40) / 3, // Calcula el ancho de cada tarjeta (restando los márgenes)
+    // // marginBottom: 10, // Agrega un margen inferior para separar las filas
+    // // marginRight: 10, // Agrega un margen derecho para separar las tarjetas
   },
   selectedCard: {
+    opacity: 0.5, // Hace la tarjeta translúcida cuando está seleccionada
     borderWidth: 2,
-    borderColor: "blue",
+    borderColor: "orange",
+    borderRadius: 5,
   },
   rowContainer: {
     flexDirection: "row",
