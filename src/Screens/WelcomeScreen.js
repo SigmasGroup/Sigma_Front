@@ -21,7 +21,7 @@ const WelcomeScreen = ({ navigation }) => {
         x: (currentPage + 1) * Dimensions.get("window").width,
       });
     } else {
-      navigation.navigate("login"); // Redirige al usuario al login después del último slide
+      navigation.navigate("home"); // Redirige al usuario al login después del último slide
     }
   };
 
