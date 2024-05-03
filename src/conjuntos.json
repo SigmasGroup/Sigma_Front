@@ -1,0 +1,190 @@
+[
+  {
+    "id": 1,
+    "titulo": "Atuendo deportivo",
+    "descripcion": "Este conjunto es ideal para actividades deportivas al aire libre.",
+    "prendas": [
+      {
+        "tipo": "cabeza",
+        "prenda": {
+          "id": 28,
+          "nombre": "Gorra de béisbol",
+          "talla": "única",
+          "color": "blanco",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "torso",
+        "prenda": {
+          "id": 25,
+          "nombre": "Polo de manga corta",
+          "talla": "M",
+          "color": "azul marino",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "piernas",
+        "prenda": {
+          "id": 16,
+          "nombre": "Shorts deportivos",
+          "talla": "S",
+          "color": "negro",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "pies",
+        "prenda": {
+          "id": 13,
+          "nombre": "Zapatillas deportivas",
+          "talla": "42",
+          "color": "negro",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Look formal",
+    "descripcion": "Este conjunto es perfecto para eventos formales o de negocios.",
+    "prendas": [
+      {
+        "tipo": "cabeza",
+        "prenda": {
+          "id": 20,
+          "nombre": "Sombrero de paja",
+          "talla": "única",
+          "color": "natural",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "torso",
+        "prenda": {
+          "id": 17,
+          "nombre": "Suéter de lana",
+          "talla": "M",
+          "color": "gris",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "piernas",
+        "prenda": {
+          "id": 18,
+          "nombre": "Pantalones cargo",
+          "talla": "L",
+          "color": "verde oliva",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "pies",
+        "prenda": {
+          "id": 19,
+          "nombre": "Botas de montaña",
+          "talla": "40",
+          "color": "marrón",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Atuendo veraniego",
+    "descripcion": "Este conjunto es fresco y cómodo para días soleados.",
+    "prendas": [
+      {
+        "tipo": "cabeza",
+        "prenda": {
+          "id": 24,
+          "nombre": "Gorra de lana",
+          "talla": "única",
+          "color": "negro",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "torso",
+        "prenda": {
+          "id": 1,
+          "nombre": "Camiseta básica",
+          "talla": "M",
+          "color": "blanco",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "piernas",
+        "prenda": {
+          "id": 26,
+          "nombre": "Falda plisada",
+          "talla": "S",
+          "color": "rosa",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "pies",
+        "prenda": {
+          "id": 23,
+          "nombre": "Sandalias",
+          "talla": "38",
+          "color": "blanco",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "titulo": "Estilo urbano",
+    "descripcion": "Este conjunto es ideal para un día relajado en la ciudad.",
+    "prendas": [
+      {
+        "tipo": "cabeza",
+        "prenda": {
+          "id": 20,
+          "nombre": "Sombrero de paja",
+          "talla": "única",
+          "color": "natural",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "torso",
+        "prenda": {
+          "id": 25,
+          "nombre": "Polo de manga corta",
+          "talla": "M",
+          "color": "azul marino",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "piernas",
+        "prenda": {
+          "id": 12,
+          "nombre": "Jeans ajustados",
+          "talla": "32",
+          "color": "azul",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      },
+      {
+        "tipo": "pies",
+        "prenda": {
+          "id": 13,
+          "nombre": "Zapatillas deportivas",
+          "talla": "42",
+          "color": "negro",
+          "img": "https://www.pnguniverse.com/wp-content/uploads/2021/06/Mono-sonriendoo-7d08166b.png"
+        }
+      }
+    ]
+  }
+]

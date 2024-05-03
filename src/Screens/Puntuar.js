@@ -1,17 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import VotacionPage from "../components/VotacionPage";
+import React from "react";
+import ConjuntosScreen from "../components/ConjuntosScreen.js";
+import conjuntos from "../conjuntos.json";
 
-export default function Puntuar() {
-  return (
-    <View style={styles.container}>
-      <VotacionPage />
-    </View>
-  );
-}
+const Puntuar = () => {
+  return <ConjuntosScreen conjuntos={conjuntos} />;
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+export default Puntuar;
