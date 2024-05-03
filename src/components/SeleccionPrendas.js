@@ -8,12 +8,12 @@ import {
   Dimensions,
   ScrollView,
 } from "react-native";
-import prendas from "../prendas.json"; // Asegúrate de que la ruta sea correcta
-import Card from "../components/Card";
+
+import Card from "./Card";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const PrendasScreen = () => {
+const SeleccionPrendas = ({ prendas, tipo }) => {
   const [selectedPrendas, setSelectedPrendas] = useState([]);
   const tiposPrenda = ["cabeza", "torso", "piernas", "pies"];
   const scrollViewRef = useRef(null);
@@ -29,10 +29,16 @@ const PrendasScreen = () => {
       });
       setCurrentPage(currentPage + 1);
     } else {
-      navigation.navigate("home");
+      handelNavigat(tipo);
     }
   };
-
+  const handelNavigat = (tipo) => {
+    if (tipo === "armario") {
+      navigation.navigate("home");
+    } else {
+      navigation.navigate("Detalle", { data: selectedPrendas });
+    }
+  };
   // Función para manejar el desplazamiento entre sliders
   const handleScroll = (event) => {
     const slideIndex = Math.round(
@@ -182,4 +188,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PrendasScreen;
+export default SeleccionPrendas;

@@ -12,7 +12,8 @@ import SeleccionRopa from "../Screens/SeleccionRopa";
 import Detalle from "../components/Detalle";
 import DetalleGuardado from "../components/detalleConjuntoGuardado";
 import WelcomeScreen from "../Screens/WelcomeScreen";
-import PrendasScreen from "../Screens/PrendasScreens";
+import PrendasScreen from "../components/SeleccionPrendas";
+import SeleccionArmario from "../Screens/SeleccionarArmario";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -38,7 +39,7 @@ function MyStackLogin() {
       <Stack.Screen
         options={{ headerShown: false }}
         name="prendas"
-        component={PrendasScreen}
+        component={SeleccionArmario}
       />
       <Stack.Screen
         options={{ headerShown: false }}
