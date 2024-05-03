@@ -13,7 +13,8 @@ import Detalle from "../components/Detalle";
 import DetalleGuardado from "../components/detalleConjuntoGuardado";
 import WelcomeScreen from "../Screens/WelcomeScreen";
 import PrendasScreen from "../components/SeleccionPrendas";
-import SeleccionArmario from "../Screens/SeleccionarArmario";
+import SeleccionArmario from "../Screens/SeleccionarArmar
+import Calendar from "../Screens/calendario";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -92,6 +93,8 @@ function MyTab() {
             iconName = focused ? "person-circle" : "person-circle-outline";
           } else if (route.name === "Crear Conjunto") {
             iconName = focused ? "add-circle" : "add-circle-outline";
+          } else if (route.name === "Calendario") {
+            iconName = focused ? "calendar" : "calendar-outline";
           }
 
           // You can return any component that you like here!
@@ -102,6 +105,11 @@ function MyTab() {
         tabBarHideOnKeyboard: true,
       })}
     >
+      <Tab.Screen
+        name="Calendario"
+        component={Calendar}
+        options={{ headerShown: false, unmountOnBlur: true }}
+      />
       <Tab.Screen
         name="Conjunto"
         component={StackFiltrarConjunto}

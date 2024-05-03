@@ -35,8 +35,9 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "eas": {}
-    },
+      "eas": {
+
+        "projectId": ""    },
     "androidStatusBar": {
       "backgroundColor": "#000",
       "translucent": true
