@@ -14,6 +14,9 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
+      "statusBar": {
+        "translucent": true
+      },
       "splash": {
         "image": "./assets/Sigma1.png",
         "resizeMode": "contain",
@@ -32,9 +35,7 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "eas": {
-        
-      }
+      "eas": {}
     },
     "androidStatusBar": {
       "backgroundColor": "#000",
