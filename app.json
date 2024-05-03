@@ -36,11 +36,12 @@
     },
     "extra": {
       "eas": {
-
-        "projectId": ""    },
-    "androidStatusBar": {
-      "backgroundColor": "#000",
-      "translucent": true
+        "projectId": ""
+      },
+      "androidStatusBar": {
+        "backgroundColor": "#000",
+        "translucent": true
+      }
     }
   }
 }
