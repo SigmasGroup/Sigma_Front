@@ -1,101 +1,179 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
+  FlatList,
   TouchableOpacity,
+  Dimensions,
+  ScrollView,
 } from "react-native";
 import prendas from "../prendas.json"; // Asegúrate de que la ruta sea correcta
 import Card from "../components/Card";
+import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const PrendasScreen = () => {
-  const [currentSlider, setCurrentSlider] = useState(0);
-  const [selectedCards, setSelectedCards] = useState([]);
+  const [selectedPrendas, setSelectedPrendas] = useState([]);
+  const tiposPrenda = ["cabeza", "torso", "piernas", "pies"];
+  const scrollViewRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const navigation = useNavigation();
 
-  // Función para manejar el cambio de slider
-  const handleNextSlider = () => {
-    setCurrentSlider((prevSlider) => prevSlider + 1); // Actualiza el estado usando una función de callback
-  };
-
-  // Función para manejar la selección de tarjetas
-  const handleSelectCard = (index) => {
-    if (selectedCards.includes(index)) {
-      setSelectedCards(
-        selectedCards.filter((cardIndex) => cardIndex !== index)
-      );
+  // Función para manejar el movimiento al siguiente slider
+  const handleNext = () => {
+    if (currentPage < tiposPrenda.length - 1) {
+      scrollViewRef.current.scrollTo({
+        animated: true,
+        x: (currentPage + 1) * Dimensions.get("window").width,
+      });
+      setCurrentPage(currentPage + 1);
     } else {
-      setSelectedCards([...selectedCards, index]);
+      navigation.navigate("home");
     }
   };
 
-  // Función para filtrar las prendas por tipo y slider actual
-  const filtrarPrendasPorTipoYSlider = (tipo) => {
-    const prendasPorTipo = prendas.filter((prenda) => prenda.tipo === tipo);
-    return prendasPorTipo.slice(currentSlider * 5, (currentSlider + 1) * 5);
+  // Función para manejar el desplazamiento entre sliders
+  const handleScroll = (event) => {
+    const slideIndex = Math.round(
+      event.nativeEvent.contentOffset.x / Dimensions.get("window").width
+    );
+    setCurrentPage(slideIndex);
+  };
+
+  // Función para manejar la selección de tarjetas
+  const handleSelectCard = (id) => {
+    if (selectedPrendas.includes(id)) {
+      setSelectedPrendas(selectedPrendas.filter((prendaId) => prendaId !== id));
+    } else {
+      setSelectedPrendas([...selectedPrendas, id]);
+    }
+  };
+
+  // Función para filtrar las prendas por tipo
+  const filtrarPrendasPorTipo = (tipo) => {
+    return prendas.filter((prenda) => prenda.tipo === tipo);
+  };
+
+  // Función para dividir las prendas en lotes de 3 para cada fila
+  const dividirPrendasPorFila = (prendas) => {
+    const filas = [];
+    for (let i = 0; i < prendas.length; i += 3) {
+      filas.push(prendas.slice(i, i + 3));
+    }
+    return filas;
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.sliderContainer}>
-          <Text style={styles.sliderTitle}>Cabeza</Text>
-          {filtrarPrendasPorTipoYSlider("cabeza").map((prenda, index) => (
-            <TouchableOpacity
-              key={index}
-              style={[
-                styles.cardTouchable,
-                selectedCards.includes(index) ? styles.selectedCard : null,
-              ]}
-              onPress={() => handleSelectCard(index)}
-            >
-              <Card prenda={prenda} />
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        <TouchableOpacity
-          style={styles.nextButton}
-          onPress={handleNextSlider}
-          disabled={
-            (currentSlider + 1) * 5 >=
-            prendas.filter((prenda) => prenda.tipo === "cabeza").length
-          }
-        >
-          <Text style={styles.buttonText}>Siguiente</Text>
-        </TouchableOpacity>
+    <LinearGradient colors={["#000", "#800080"]} style={styles.container}>
+      <ScrollView
+        ref={scrollViewRef}
+        horizontal
+        pagingEnabled
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.scrollViewContent}
+      >
+        {tiposPrenda.map((tipo, index) => (
+          <View
+            key={index}
+            style={{
+              width: Dimensions.get("window").width,
+              paddingTop: 25,
+              flex: 1,
+            }}
+          >
+            <View style={styles.sliderContainer}>
+              <Text style={styles.sliderTitle}>{tipo.toUpperCase()}</Text>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {dividirPrendasPorFila(filtrarPrendasPorTipo(tipo)).map(
+                  (fila, filaIndex) => (
+                    <View key={filaIndex} style={styles.rowContainer}>
+                      {fila.map((prenda) => (
+                        <TouchableOpacity
+                          key={prenda.id}
+                          style={[
+                            styles.cardTouchable,
+                            selectedPrendas.includes(prenda.id) &&
+                              styles.selectedCard,
+                          ]}
+                          onPress={() => handleSelectCard(prenda.id)}
+                        >
+                          <Card
+                            prenda={prenda}
+                            selected={selectedPrendas.includes(prenda.id)}
+                          />
+                        </TouchableOpacity>
+                      ))}
+                    </View>
+                  )
+                )}
+              </ScrollView>
+            </View>
+          </View>
+        ))}
       </ScrollView>
-    </View>
+
+      {/* Botón "Siguiente" */}
+      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
+        <Text style={styles.buttonText}>Siguiente</Text>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   sliderContainer: {
-    marginBottom: 20,
+    flex: 1,
+    padding: 10,
+  },
+  scrollViewContent: {
+    alignItems: "center",
+    zIndex: 10,
   },
   sliderTitle: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
+    color: "white", // Ajustamos el color del texto
   },
   cardTouchable: {
-    marginBottom: 10,
+    // width: (Dimensions.get("window").width - 40) / 3, // Calcula el ancho de cada tarjeta (restando los márgenes)
+    // // marginBottom: 10, // Agrega un margen inferior para separar las filas
+    // // marginRight: 10, // Agrega un margen derecho para separar las tarjetas
   },
   selectedCard: {
+    opacity: 0.5, // Hace la tarjeta translúcida cuando está seleccionada
     borderWidth: 2,
-    borderColor: "blue",
+    borderColor: "orange",
+    borderRadius: 5,
+  },
+  rowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between", // Alinea las tarjetas al espacio entre sí
+    marginBottom: 10, // Agrega un margen inferior para separar las filas
   },
   nextButton: {
     backgroundColor: "#800080",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
-    marginTop: 20,
-    alignSelf: "flex-end",
+    margin: 10,
+    alignSelf: "center",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    zIndex: 1,
   },
   buttonText: {
     color: "white",
