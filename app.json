@@ -33,7 +33,11 @@
     },
     "extra": {
       "eas": {
+
+        "projectId": ""
+=======
         
+
       }
     },
     "androidStatusBar": {
