@@ -40,19 +40,20 @@ export default function MyAcount() {
   }, []);
 
   useEffect(() => {
-    const loadProfileImage = async () => {
-      try {
-        const storedImage = await AsyncStorage.getItem("profileImage");
-        if (storedImage) {
-          setImage(storedImage);
-        }
-      } catch (error) {
-        console.error("Error al cargar la imagen desde AsyncStorage:", error);
-      }
-    };
+    if (image) {
+      // Guardar la imagen en AsyncStorage
 
-    loadProfileImage();
-  }, []);
+      const saveImageToAsyncStorage = async () => {
+        try {
+          await AsyncStorage.setItem("profileImage", image);
+        } catch (error) {
+          console.error("Error al guardar la imagen en AsyncStorage:", error);
+        }
+      };
+
+      saveImageToAsyncStorage();
+    }
+  }, [image]);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -65,14 +66,7 @@ export default function MyAcount() {
     console.log(result);
 
     if (!result.canceled) {
-      setImage(result.uri);
-
-      // Guardar la imagen en AsyncStorage
-      try {
-        await AsyncStorage.setItem("profileImage", result.uri);
-      } catch (error) {
-        console.error("Error al guardar la imagen en AsyncStorage:", error);
-      }
+      setImage(result.assets[0].uri);
     }
   };
 
