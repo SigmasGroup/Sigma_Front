@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
+import GlobalApi from "../services/GlobalApi";
 
 const Card = ({ prenda }) => {
+  const img = GlobalApi.getImg(prenda);
   return (
     <View style={styles.card}>
-      <Image source={{ uri: prenda.img }} style={styles.image} />
+      <Image source={{ uri: img }} style={styles.image} />
     </View>
   );
 };

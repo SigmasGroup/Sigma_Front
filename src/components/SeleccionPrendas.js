@@ -13,7 +13,7 @@ import Card from "./Card";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const SeleccionPrendas = ({ prendas, tipo }) => {
+const SeleccionPrendas = ({ prendas, tipo, respuesta }) => {
   const [selectedPrendas, setSelectedPrendas] = useState([]);
   const tiposPrenda = ["cabeza", "torso", "piernas", "pies"];
   const scrollViewRef = useRef(null);
@@ -58,7 +58,9 @@ const SeleccionPrendas = ({ prendas, tipo }) => {
 
   // Función para filtrar las prendas por tipo
   const filtrarPrendasPorTipo = (tipo) => {
-    return prendas.filter((prenda) => prenda.tipo === tipo);
+    return respuesta.filter(
+      (attributes) => attributes.attributes.tipoPrenda === tipo
+    );
   };
 
   // Función para dividir las prendas en lotes de 3 para cada fila
@@ -81,6 +83,7 @@ const SeleccionPrendas = ({ prendas, tipo }) => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollViewContent}
       >
+        {console.log(respuesta)}
         {tiposPrenda.map((tipo, index) => (
           <View
             key={index}
@@ -96,19 +99,20 @@ const SeleccionPrendas = ({ prendas, tipo }) => {
                 {dividirPrendasPorFila(filtrarPrendasPorTipo(tipo)).map(
                   (fila, filaIndex) => (
                     <View key={filaIndex} style={styles.rowContainer}>
-                      {fila.map((prenda) => (
+                      {console.log("fila", fila)}
+                      {fila.map((attributes) => (
                         <TouchableOpacity
-                          key={prenda.id}
+                          key={attributes.id}
                           style={[
                             styles.cardTouchable,
-                            selectedPrendas.includes(prenda.id) &&
+                            selectedPrendas.includes(attributes.id) &&
                               styles.selectedCard,
                           ]}
-                          onPress={() => handleSelectCard(prenda.id)}
+                          onPress={() => handleSelectCard(attributes.id)}
                         >
                           <Card
-                            prenda={prenda}
-                            selected={selectedPrendas.includes(prenda.id)}
+                            prenda={attributes}
+                            selected={selectedPrendas.includes(attributes.id)}
                           />
                         </TouchableOpacity>
                       ))}

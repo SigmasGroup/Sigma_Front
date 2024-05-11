@@ -36,7 +36,7 @@ const postConjunto = (name, descripcion, id, userId) =>
   });
 
 //Get
-const getRopas = () => api.get("/api/ropas?populate");
+const getRopas = () => api.get("/api/ropas?populate[img][fields]=url");
 const getDetalleComunidad = () =>
   api.get(
     "api/conjuntos?populate[ropas][populate][img][fields]=url&[filters][tipoConjunto][$eq]=comunidad"
@@ -56,7 +56,7 @@ const getDetalleFavorite = (id) =>
   );
 
 const getImg = ({ attributes }) => {
-  const { url } = attributes.img.data.attributes;
+  const url = attributes.img.data.attributes.url;
   return `https://sigma-l1x8.onrender.com${url}`;
 };
 const getUser = (id) => api.get(`/api/users/${id}`);
