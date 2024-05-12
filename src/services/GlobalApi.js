@@ -37,6 +37,10 @@ const postConjunto = (name, descripcion, id, userId) =>
 
 //Get
 const getRopas = () => api.get("/api/ropas?populate[img][fields]=url");
+const getRopasUser = (id) =>
+  api.get(
+    `/api/ropas?populate[img][fields]=url&populate[users][fields]=id&[filters][users][id][$eq]=${id}`
+  );
 const getDetalleComunidad = () =>
   api.get(
     "api/conjuntos?populate[ropas][populate][img][fields]=url&[filters][tipoConjunto][$eq]=comunidad"
@@ -62,6 +66,21 @@ const getImg = ({ attributes }) => {
 const getUser = (id) => api.get(`/api/users/${id}`);
 
 // Put
+const putArmarioUser = async (idUser, idRopas) => {
+  try {
+    const response = await api.put(`/api/users/${idUser}`, {
+      armario: idRopas,
+    });
+    if (response.status === 200) {
+      console.log(`Armario actualizada con éxito`);
+    } else {
+      console.error(`Error al actualizar la puntuación`);
+    }
+  } catch (error) {
+    console.error("Error al enviar la solicitud de actualización:", error);
+  }
+};
+
 const putPuntuacion = async (conjuntoId, nuevaPuntuacion) => {
   try {
     const response = await api.put(`/api/conjuntos/${conjuntoId}`, {
@@ -126,4 +145,6 @@ export default {
   putFavorite,
   getDetalleFavorite,
   putTipoConjunto,
+  putArmarioUser,
+  getRopasUser,
 };

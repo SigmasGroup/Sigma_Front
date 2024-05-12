@@ -12,8 +12,10 @@ import {
 import Card from "./Card";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import GlobalApi from "../services/GlobalApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const SeleccionPrendas = ({ prendas, tipo, respuesta }) => {
+const SeleccionPrendas = ({ tipo, respuesta }) => {
   const [selectedPrendas, setSelectedPrendas] = useState([]);
   const tiposPrenda = ["cabeza", "torso", "piernas", "pies"];
   const scrollViewRef = useRef(null);
@@ -29,11 +31,13 @@ const SeleccionPrendas = ({ prendas, tipo, respuesta }) => {
       });
       setCurrentPage(currentPage + 1);
     } else {
-      handelNavigat(tipo);
+      handelNavigat(tipo, selectedPrendas);
     }
   };
-  const handelNavigat = (tipo) => {
+  const handelNavigat = async (tipo, idRopas) => {
     if (tipo === "armario") {
+      const storedUserId = await AsyncStorage.getItem("id");
+      await GlobalApi.putArmarioUser(storedUserId, idRopas);
       navigation.navigate("home");
     } else {
       navigation.navigate("Detalle", { data: selectedPrendas });
@@ -83,7 +87,7 @@ const SeleccionPrendas = ({ prendas, tipo, respuesta }) => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollViewContent}
       >
-        {console.log(respuesta)}
+        {console.log(selectedPrendas)}
         {tiposPrenda.map((tipo, index) => (
           <View
             key={index}
@@ -99,7 +103,6 @@ const SeleccionPrendas = ({ prendas, tipo, respuesta }) => {
                 {dividirPrendasPorFila(filtrarPrendasPorTipo(tipo)).map(
                   (fila, filaIndex) => (
                     <View key={filaIndex} style={styles.rowContainer}>
-                      {console.log("fila", fila)}
                       {fila.map((attributes) => (
                         <TouchableOpacity
                           key={attributes.id}

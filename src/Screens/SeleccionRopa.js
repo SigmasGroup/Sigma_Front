@@ -10,6 +10,7 @@ import {
 import SeleccionPrendas from "../components/SeleccionPrendas";
 import prendas from "../prendas.json"; // Asegúrate de que la ruta sea correcta
 import GlobalApi from "../services/GlobalApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SeleccionRopa() {
   const [ropas, setRopas] = useState([]);
@@ -17,12 +18,13 @@ export default function SeleccionRopa() {
     getRopas();
   }, []);
   const getRopas = async () => {
-    const respueta = (await GlobalApi.getRopas()).data.data;
+    const storedUserId = await AsyncStorage.getItem("id");
+    const respueta = (await GlobalApi.getRopasUser(storedUserId)).data.data;
     setRopas(respueta);
   };
   return (
     <View style={styles.container}>
-      <SeleccionPrendas prendas={prendas} tipo={"detalle"} respuesta={ropas} />
+      <SeleccionPrendas tipo={"detalle"} respuesta={ropas} />
     </View>
   );
 }
